@@ -14,6 +14,7 @@ class Ui_estopWindow(object):
         self.ui=main_w
         self.ui.setupUi(MainWindow)
         self.ui.textBrowser.setText(TextButton)
+        
     def setupUi(self, estopWindow,Ui_MainWindow,MainWindow):
         estopWindow.setObjectName("estopWindow")
         estopWindow.resize(546, 300)
@@ -23,16 +24,13 @@ class Ui_estopWindow(object):
         font.setPointSize(12)
         self.label.setFont(font)
         self.label.setObjectName("label")
+        
         self.acceptbutton = QtWidgets.QPushButton(estopWindow, clicked=lambda: self.setESTOPstate(Ui_MainWindow,MainWindow))
         self.acceptbutton.clicked.connect(lambda:estopWindow.close())
         self.acceptbutton.setGeometry(QtCore.QRect(170, 200, 93, 28))
         self.acceptbutton.setObjectName("acceptbutton")
 
-        self.declinebutton = QtWidgets.QPushButton(estopWindow)
-        self.declinebutton.clicked.connect(lambda:estopWindow.close())
-
         self.declinebutton = QtWidgets.QPushButton(estopWindow,clicked=lambda:estopWindow.close())
-
         self.declinebutton.setGeometry(QtCore.QRect(290, 200, 93, 28))
         self.declinebutton.setObjectName("declinebutton")
 
@@ -56,5 +54,4 @@ if __name__ == "__main__":
 
     sys.exit(app.exec_())
 
-    sys.exit(app.exec_())
 
