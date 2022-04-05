@@ -1,4 +1,4 @@
-# HyperloopSupero
+# HyperloopSupaero
 
 ![HYPERLOOP](https://user-images.githubusercontent.com/97123368/157680947-9e6c7dbe-bec0-49dc-a396-6c6e3fa803e2.png)
 
