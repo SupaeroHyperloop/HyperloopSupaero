@@ -1,0 +1,2 @@
+# HyperloopSupero
+The Hyperloop Supaero team was born out of the motivation and desire of a small group of students to face new technological challenges. As the first French Hyperloop technology development team based at the Institut Supérieur de l’Aéronautique et de l’Espace in Toulouse, our main goal is to design and improve the current technology and infrastructure needed to implement a Hyperloop prototype, the transport of tomorrow
