@@ -9,7 +9,9 @@ Created on Thu Mar 31 15:03:37 2022
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
-sys.path.insert(1,'statesWindow.py')
+#---Add paths of python files here----#
+
+sys.path.insert(1,'statesWindow.py') 
 sys.path.insert(1,'estopWindow.py')
 sys.path.insert(1,'shutdownWindow.py')
 
@@ -18,7 +20,6 @@ from estopWindow import Ui_estopWindow
 from shutdownWindow import Ui_shutdownWindow
 
 class Ui_MainWindow(object):
-    
     
     def openStatesWindow(self):
         self.window=QtWidgets.QMainWindow()
