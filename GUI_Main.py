@@ -3,15 +3,15 @@
 """
 Created on Thu Mar 31 15:03:37 2022
 
-@author: ronankeane
+@author: SupaeroHyperloop
 """
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
-sys.path.insert(1,'/Users/ronankeane/Desktop/HYPERLOOP-SUPAERO/Hyperloop-SUPAERO/statesWindow.py')
-sys.path.insert(1,'/Users/ronankeane/Desktop/HYPERLOOP-SUPAERO/Hyperloop-SUPAERO/estopWindow.py')
-sys.path.insert(1,'/Users/ronankeane/Desktop/HYPERLOOP-SUPAERO/Hyperloop-SUPAERO/shutdownWindow.py')
+sys.path.insert(1,'statesWindow.py')
+sys.path.insert(1,'estopWindow.py')
+sys.path.insert(1,'shutdownWindow.py')
 
 from statesWindow import Ui_statesWindow
 from estopWindow import Ui_estopWindow
