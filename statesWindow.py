@@ -6,6 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_statesWindow(object):
@@ -14,64 +15,78 @@ class Ui_statesWindow(object):
         TextButton= self.PreDriveButton_DS.text()
         self.ui=main_w
         self.ui.setupUi(MainWindow)
+        self.ui.setStateTimer()
         self.ui.textBrowser.setText(TextButton)
+        self.ui.textBrowser_12.insertPlainText("Predriving...\n")
+        self.ui.textBrowser_12.insertPlainText(self.LogList)
+
         
     def setInitState(self,main_w,MainWindow):
         TextButton= self.InitButton_FS.text()
         self.ui=main_w
         self.ui.setupUi(MainWindow)
+        self.ui.setTotalTimer()
+        self.ui.setStateTimer()
         self.ui.textBrowser.setText(TextButton)
-        
-        
+        self.ui.textBrowser_12.insertPlainText("Initializing...\n")
 
-    
-    def setInitState(self,main_w,MainWindow):
-        TextButton= self.InitButton_FS.text()
-        self.ui=main_w
-        self.ui.setupUi(MainWindow)
-        self.ui.textBrowser.setText(TextButton)
-    def setPreDriveState(self,main_w,MainWindow):
-        TextButton= self.PreDriveButton_DS.text()
-        self.ui=main_w
-        self.ui.setupUi(MainWindow)
-        self.ui.textBrowser.setText(TextButton)
 
+
+        
     def setDriveState(self,main_w,MainWindow):
         TextButton= self.DriveButton_DS.text()
         self.ui=main_w
         self.ui.setupUi(MainWindow)
+        self.ui.setStateTimer()
         self.ui.textBrowser.setText(TextButton)
+        self.ui.textBrowser_12.insertPlainText("Driving...\n")
 
-       
         
-
     def setPreArmState(self,main_w,MainWindow):
         TextButton= self.PreArmButton_FS.text()
         self.ui=main_w
         self.ui.setupUi(MainWindow)
+        self.ui.setStateTimer()
         self.ui.textBrowser.setText(TextButton)
+        self.ui.textBrowser_12.insertPlainText("Prearming...\n")
+        
     def setArmState(self,main_w,MainWindow):
         TextButton= self.ArmButton_FS.text()
         self.ui=main_w
         self.ui.setupUi(MainWindow)
+        self.ui.setStateTimer()
         self.ui.textBrowser.setText(TextButton)
+        self.ui.textBrowser_12.insertPlainText("Arming...\n")
+    
+        
     def setLaunchState(self,main_w,MainWindow):
         TextButton= self.LaunchButton_FS.text()
         self.ui=main_w
         self.ui.setupUi(MainWindow)
+        self.ui.setStateTimer()
+        self.ui.setTotalTimer()
         self.ui.textBrowser.setText(TextButton)
+        self.ui.textBrowser_12.insertPlainText("Launching...\n")
+        
+        
     def setFlightState(self,main_w,MainWindow):
         TextButton= self.FlightButton_FS.text()
         self.ui=main_w
         self.ui.setupUi(MainWindow)
+        self.ui.setStateTimer()
         self.ui.textBrowser.setText(TextButton)
+        self.ui.textBrowser_12.insertPlainText("Setting Flight State...\n")
+        
     def setSoftStop(self,main_w,MainWindow):
         TextButton= self.SoftStopButton_FS.text()
         self.ui=main_w
         self.ui.setupUi(MainWindow)
+        self.ui.setStateTimer()
         self.ui.textBrowser.setText(TextButton)
+        self.ui.textBrowser_12.insertPlainText("Soft Stop...\n")
     
     def setupUi(self, statesWindow, Ui_MainWindow,MainWindow):
+        
         statesWindow.setObjectName("statesWindow")
         statesWindow.resize(450, 344)
         self.label = QtWidgets.QLabel(statesWindow)
@@ -139,6 +154,7 @@ class Ui_statesWindow(object):
 
         self.PreArmButton_FS.setText(_translate("statesWindow", "Pre-Arm"))
         self.InitButton_FS.setText(_translate("statesWindow", "Initializing"))
+        
 
         self.InitButton_FS.setText(_translate("statesWindow", "Initializing"))
         self.PreArmButton_FS.setText(_translate("statesWindow", "Pre-Arm"))
@@ -150,6 +166,7 @@ class Ui_statesWindow(object):
         self.PreDriveButton_DS.setText(_translate("statesWindow", "Pre-Drive"))
         self.DriveButton_DS.setText(_translate("statesWindow", "Drive"))
         #self.PreArmButton_FS.text()
+        
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -161,4 +178,3 @@ if __name__ == "__main__":
     sys.exit(app.exec_())
 
     sys.exit(app.exec_())
-
