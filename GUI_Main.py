@@ -27,13 +27,13 @@ class Ui_MainWindow(object):
 
     def __init__(self):
         self.time =0.00000
-        self.LogList = str()
+        self.log = str()
         self.centralwidget = QtWidgets.QWidget(MainWindow)
 
     def openStatesWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_statesWindow()
-        self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow,log,self.getTotalTimer())
+        self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow,self.getLogList(),self.getTotalTimer())
         
         self.window.show()
         
@@ -67,9 +67,16 @@ class Ui_MainWindow(object):
         
     def getTotalTimer(self):
         return self.time
+    
+    def updateLogList(self, logList):
+        self.log = logList
+    
+    def getLogList(self):
+        return self.log
         
     def setStateTimer(self):
         self.timeState= 0.000
+        self.stateTime=QtCore.QTimer()
         self.stateTime.setInterval(50)
         self.stateTime.timeout.connect(self.setStateTimeLCD)
         self.stateTime.start()
@@ -122,10 +129,7 @@ class Ui_MainWindow(object):
         self.stateTimerLCD.setGeometry(QtCore.QRect(210, 57, 101, 31))
         self.stateTimerLCD.setStyleSheet("QLCDNumber{\n" "\n" "background-color:black;\n" "}")
         self.stateTimerLCD.setObjectName("stateTimerLCD")
-        
-        #Create a timer
-        self.totalTime=QtCore.QTimer()
-        self.stateTime=QtCore.QTimer()
+
         
         self.label_Logo = QtWidgets.QLabel(self.centralwidget)
         self.pixmap = QPixmap('GUI_Logo.png') #Remember to add your own path
@@ -490,7 +494,7 @@ class Ui_MainWindow(object):
         self.changeStateButton.setText(_translate("MainWindow", "Change State"))
         self.LogLabel.setText(_translate("MainWindow", "Log"))
         
-        self.textBrowser_12.setHtml(_translate("MainWindow",log))
+        self.textBrowser_12.setHtml(_translate("MainWindow",None))
         
         self.textBrowser.setHtml(_translate("MainWindow", ""))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ModeTab), _translate("MainWindow", "Mode"))
