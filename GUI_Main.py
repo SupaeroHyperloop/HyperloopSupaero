@@ -11,11 +11,12 @@ from PyQt5.QtGui import QPixmap
 import sys
 
 
+
 #---Add paths of python files here----#
 
-sys.path.insert(1,'statesWindow.py') 
-sys.path.insert(1,'estopWindow.py')
-sys.path.insert(1,'shutdownWindow.py')
+sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/statesWindow.py') 
+sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/estopWindow.py')
+sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/shutdownWindow.py')
 
 
 from statesWindow import Ui_statesWindow
@@ -23,49 +24,61 @@ from estopWindow import Ui_estopWindow
 from shutdownWindow import Ui_shutdownWindow
 
 class Ui_MainWindow(object):
-    
 
     def __init__(self):
+        self.time =0.00000
         self.LogList = str()
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
 
     def openStatesWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_statesWindow()
-        self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow)
+        self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow,log,self.getTotalTimer())
+        
         self.window.show()
+        
     def openEstopWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_estopWindow()
         self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow)
         self.window.show()
+        
     def openShutdownWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_shutdownWindow()
         self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow)
         self.window.show()
-        
-        
-    def setTotalTimer(self):
-        self.time=0.000
-        self.totalTime.timeout.connect(self.setTotalTimeLCD)
-        self.totalTime.start(50)
-        print(self.LogList)
+
+    def setTotalTimer(self,timer):
+        if timer is None:
+            self.time=0.000
+        else:
+            self.time = timer
             
-    def setTotalTimeLCD(self):                    
-        self.time +=0.05
-        self.totalTimerLCD.display("{:.2f}".format(self.time))    
-  
+        self.totalTime=QtCore.QTimer()
+        self.totalTime.setInterval(50)
+        self.totalTime.timeout.connect(self.setTotalTimeLCD)
+        self.totalTime.start()
+   
+    def setTotalTimeLCD(self):   
+        self.time = self.time + 0.05
+        self.getTotalTimer()
+        self.totalTimerLCD.display("{:.2f}".format(self.time))
+        
+    def getTotalTimer(self):
+        return self.time
+        
     def setStateTimer(self):
-        self.timeState= float(0.000)
+        self.timeState= 0.000
+        self.stateTime.setInterval(50)
         self.stateTime.timeout.connect(self.setStateTimeLCD)
-        self.stateTime.start(50)
-                
+        self.stateTime.start()
+        
     def setStateTimeLCD(self):    
         self.timeState += 0.05
         self.stateTimerLCD.display("{:.2f}".format(self.timeState))    
-
-
         
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1265, 949)
@@ -75,19 +88,7 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        
-        """
-        self.timeEdit = QtWidgets.QTimeEdit(self.centralwidget)
-        self.timeEdit.setGeometry(QtCore.QRect(200, 17, 101, 31))
-        self.timeEdit.setObjectName("timeEdit")
-        self.timeEdit.setStyleSheet("background-color: white;")
-        
-        self.timeEdit_2 = QtWidgets.QTimeEdit(self.centralwidget)
-        self.timeEdit_2.setGeometry(QtCore.QRect(200, 57, 101, 31))
-        self.timeEdit_2.setObjectName("timeEdit_2")
-        self.timeEdit_2.setStyleSheet("background-color: white;")
-        """""
-        
+
         self.TimeTotalLabel = QtWidgets.QLabel(self.centralwidget)
         self.TimeTotalLabel.setGeometry(QtCore.QRect(10, 20, 171, 25))
         font = QtGui.QFont()
@@ -111,8 +112,6 @@ class Ui_MainWindow(object):
         self.TimeStateLabel.setFont(font)
         self.TimeStateLabel.setObjectName("TimeStateLabel")
         self.TimeStateLabel.setStyleSheet("background-color: white;")
-        
-        
         
         self.totalTimerLCD = QtWidgets.QLCDNumber(self.centralwidget)
         self.totalTimerLCD.setGeometry(QtCore.QRect(210, 17, 101, 31))
@@ -152,10 +151,9 @@ class Ui_MainWindow(object):
         self.textBrowser_13.setGeometry(QtCore.QRect(460, 175, 101, 28))
         self.textBrowser_13.setObjectName("textBrowser_13")
         self.textBrowser_13.setStyleSheet("background-color: white;")
-        
-        
+          
         self.TemperatureLabel = QtWidgets.QLabel(self.centralwidget)
-        self.TemperatureLabel.setGeometry(QtCore.QRect(370, 45, 175, 25))
+        self.TemperatureLabel.setGeometry(QtCore.QRect(370, 25, 175, 25))
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -165,7 +163,6 @@ class Ui_MainWindow(object):
         self.TemperatureLabel.setFont(font)
         self.TemperatureLabel.setObjectName("TemperatureLabel")
         self.TemperatureLabel.setStyleSheet("background-color: white;")
-        
         
         self.textBrowser_4 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser_4.setGeometry(QtCore.QRect(775, 115, 101, 28))
@@ -204,7 +201,6 @@ class Ui_MainWindow(object):
         self.BatteryTempLabel.setObjectName("BatteryTempLabel")
         self.BatteryTempLabel.setStyleSheet("background-color: white;")
         
-        
         #IMU labels
         
         self.AccelLabel = QtWidgets.QLabel(self.centralwidget)
@@ -234,7 +230,6 @@ class Ui_MainWindow(object):
         self.IMULabel.setObjectName("IMULabel")
         self.IMULabel.setStyleSheet("background-color: white;")
        
-        
        # Levitation labels
         
         self.RearLeftLabel = QtWidgets.QLabel(self.centralwidget)
@@ -252,7 +247,6 @@ class Ui_MainWindow(object):
         self.FrontLeftLabel.setObjectName("FrontLeftLabel")
         self.FrontLeftLabel.setStyleSheet("background-color: white;")
         
-        
         self.RearRightLabel = QtWidgets.QLabel(self.centralwidget)
         self.RearRightLabel.setGeometry(QtCore.QRect(950, 175, 151, 28))
         self.RearRightLabel.setObjectName("RearRightLabel")
@@ -262,7 +256,6 @@ class Ui_MainWindow(object):
         self.textBrowser_8.setGeometry(QtCore.QRect(1110, 145, 101, 28))
         self.textBrowser_8.setObjectName("textBrowser_8")
         self.textBrowser_8.setStyleSheet("background-color: white;")
-        
     
         self.LevitationLabel = QtWidgets.QLabel(self.centralwidget)
         self.LevitationLabel.setGeometry(QtCore.QRect(970, 45, 200, 25))
@@ -497,7 +490,7 @@ class Ui_MainWindow(object):
         self.changeStateButton.setText(_translate("MainWindow", "Change State"))
         self.LogLabel.setText(_translate("MainWindow", "Log"))
         
-        self.textBrowser_12.setHtml(_translate("MainWindow",""))
+        self.textBrowser_12.setHtml(_translate("MainWindow",log))
         
         self.textBrowser.setHtml(_translate("MainWindow", ""))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ModeTab), _translate("MainWindow", "Mode"))
@@ -510,6 +503,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+    log = str()
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
