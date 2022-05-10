@@ -9,11 +9,9 @@ Created on Thu Mar 31 15:03:37 2022
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
 import sys
-
-
+import time
 
 #---Add paths of python files here----#
-
 sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/statesWindow.py') 
 sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/estopWindow.py')
 sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/shutdownWindow.py')
@@ -28,13 +26,12 @@ class Ui_MainWindow(object):
     def __init__(self):
         self.time =0.00000
         self.log = str()
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+
 
     def openStatesWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_statesWindow()
         self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow,self.getLogList(),self.getTotalTimer())
-        
         self.window.show()
         
     def openEstopWindow(self):
@@ -84,6 +81,36 @@ class Ui_MainWindow(object):
     def setStateTimeLCD(self):    
         self.timeState += 0.05
         self.stateTimerLCD.display("{:.2f}".format(self.timeState))    
+        
+    def computeAccel(self):
+        self.computedAccel= 0.000
+        self.accelCounter.setInterval(1000)
+        self.accelCounter.timeout.connect(self.setAccel)
+        self.accelCounter.start()
+    
+    def computeVelocity(self):
+        self.computedVelocity= 0.000
+        self.velocityCounter.setInterval(1000)
+        self.velocityCounter.timeout.connect(self.setVelocity)
+        self.velocityCounter.start()
+    
+    def computeDistance(self):
+        self.computedDistance= 0.000
+        self.distanceCounter.setInterval(1000)
+        self.distanceCounter.timeout.connect(self.setDistance)
+        self.distanceCounter.start()
+        
+    def setAccel(self):
+        self.computedAccel+=0.05
+        self.textBrowser_7.setText("{:.2f}".format(self.computedAccel))
+    
+    def setVelocity(self):
+        self.computedVelocity+=0.1
+        self.textBrowser_4.setText("{:.2f}".format(self.computedVelocity))
+    
+    def setDistance(self):
+        self.computedDistance+=0.5
+        self.textBrowser_6.setText("{:.2f}".format(self.computedDistance))
         
 
     def setupUi(self, MainWindow):
@@ -157,7 +184,7 @@ class Ui_MainWindow(object):
         self.textBrowser_13.setStyleSheet("background-color: white;")
           
         self.TemperatureLabel = QtWidgets.QLabel(self.centralwidget)
-        self.TemperatureLabel.setGeometry(QtCore.QRect(370, 25, 175, 25))
+        self.TemperatureLabel.setGeometry(QtCore.QRect(370, 45, 175, 25))
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -233,6 +260,11 @@ class Ui_MainWindow(object):
         self.IMULabel.setAlignment(QtCore.Qt.AlignCenter)
         self.IMULabel.setObjectName("IMULabel")
         self.IMULabel.setStyleSheet("background-color: white;")
+        
+        
+        self.accelCounter=QtCore.QTimer()
+        self.velocityCounter=QtCore.QTimer()
+        self.distanceCounter=QtCore.QTimer()
        
        # Levitation labels
         
@@ -367,6 +399,11 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         
         self.textBrowser_12 = QtWidgets.QTextBrowser(self.scrollAreaWidgetContents)
+        
+        self.textBrowser_12.moveCursor(QtGui.QTextCursor.End) #the self.scrollbar is the same as your self.console_window
+
+        
+        self.textBrowser_12.setVerticalScrollBarPolicy(2)
         self.textBrowser_12.setGeometry(QtCore.QRect(0, 0, 581, 441))
         self.textBrowser_12.setObjectName("textBrowser_12")
         self.textBrowser_12.setStyleSheet("background-color: white;")
@@ -493,6 +530,7 @@ class Ui_MainWindow(object):
         self.shutdownButton.setText(_translate("MainWindow", "Shutdown"))
         self.changeStateButton.setText(_translate("MainWindow", "Change State"))
         self.LogLabel.setText(_translate("MainWindow", "Log"))
+        
         
         self.textBrowser_12.setHtml(_translate("MainWindow",None))
         

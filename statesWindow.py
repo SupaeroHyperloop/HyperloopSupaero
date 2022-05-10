@@ -12,13 +12,22 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_statesWindow(object):
+    
+
 
     def setPreDriveState(self,main_w,MainWindow,log):
         TextButton= self.PreDriveButton_DS.text()
         self.ui=main_w
         self.ui.setupUi(MainWindow)
         
-        log = log +"Predriving...\n"
+        timer = self.ui.time
+        self.ui.setTotalTimer(timer)
+        self.ui.setStateTimer()
+        m, s = divmod(timer, 60)
+        
+
+        log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Predriving...\n"
+        
         self.ui.updateLogList(log)
         
         timer = self.ui.time
@@ -33,12 +42,16 @@ class Ui_statesWindow(object):
         TextButton= self.InitButton_FS.text()
         self.ui=main_w
         
-        log = log +"Initializing...\n"
+        log = log + "Initializing...\n"
         self.ui.updateLogList(log)
         
         self.ui.setupUi(MainWindow)
         self.ui.setTotalTimer(None)
         self.ui.setStateTimer()
+
+        self.ui.computeVelocity()
+        self.ui.computeDistance()
+        self.ui.computeAccel()
         
         self.ui.textBrowser.setText(TextButton)
         self.ui.textBrowser_12.insertPlainText(log)
@@ -51,8 +64,9 @@ class Ui_statesWindow(object):
         timer = self.ui.time
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
+        m, s = divmod(timer, 60)
         
-        log = log + "Driving...\n"
+        log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Driving...\n"
         self.ui.updateLogList(log)
                 
         self.ui.textBrowser.setText(TextButton)
@@ -67,8 +81,10 @@ class Ui_statesWindow(object):
         timer = self.ui.time
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
+        m, s = divmod(timer, 60)
         
-        log = log + "Prearming...\n"
+
+        log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Prearming...\n"
         self.ui.updateLogList(log)
                 
         self.ui.textBrowser.setText(TextButton)
@@ -83,8 +99,10 @@ class Ui_statesWindow(object):
         timer = self.ui.time
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
+        m, s = divmod(timer, 60)
         
-        log = log + "Arming...\n"
+
+        log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Arming...\n"
         self.ui.updateLogList(log)
                 
         self.ui.textBrowser.setText(TextButton)
@@ -99,8 +117,10 @@ class Ui_statesWindow(object):
         timer = self.ui.time
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
+        m, s = divmod(timer, 60)
         
-        log = log + "Launching...\n"
+
+        log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Launching...\n"
         self.ui.updateLogList(log)
                 
         self.ui.textBrowser.setText(TextButton)
@@ -115,8 +135,10 @@ class Ui_statesWindow(object):
         timer = self.ui.time
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
+        m, s = divmod(timer, 60)
         
-        log = log + "Setting Flight State...\n"
+
+        log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Setting Flight State...\n"
         self.ui.updateLogList(log)
                 
         self.ui.textBrowser.setText(TextButton)
@@ -131,8 +153,10 @@ class Ui_statesWindow(object):
         timer = self.ui.time
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
+        m, s = divmod(timer, 60)
         
-        log = log + "Soft Stopping...\n"
+
+        log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Soft Stopping...\n"
         self.ui.updateLogList(log)
                 
         self.ui.textBrowser.setText(TextButton)
