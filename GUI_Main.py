@@ -51,7 +51,6 @@ class Ui_MainWindow(object):
             self.time=0.000
         else:
             self.time = timer
-            
         self.totalTime=QtCore.QTimer()
         self.totalTime.setInterval(50)
         self.totalTime.timeout.connect(self.setTotalTimeLCD)
@@ -60,7 +59,9 @@ class Ui_MainWindow(object):
     def setTotalTimeLCD(self):   
         self.time = self.time + 0.05
         self.getTotalTimer()
-        self.totalTimerLCD.display("{:.2f}".format(self.time))
+        
+        m, s = divmod(self.time, 60)
+        self.totalTimerLCD.display('{:02d}:{:02d}'.format(int(m), int(s)))
         
     def getTotalTimer(self):
         return self.time
@@ -102,17 +103,16 @@ class Ui_MainWindow(object):
         
     def setAccel(self):
         self.computedAccel+=0.05
-        self.textBrowser_7.setText("{:.2f}".format(self.computedAccel))
+        self.AccelReading .setText("{:.2f}".format(self.computedAccel))
     
     def setVelocity(self):
         self.computedVelocity+=0.1
-        self.textBrowser_4.setText("{:.2f}".format(self.computedVelocity))
+        self.VelocityReading.setText("{:.2f}".format(self.computedVelocity))
     
     def setDistance(self):
         self.computedDistance+=0.5
-        self.textBrowser_6.setText("{:.2f}".format(self.computedDistance))
+        self.DistanceReading.setText("{:.2f}".format(self.computedDistance))
         
-
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1265, 949)
@@ -157,31 +157,32 @@ class Ui_MainWindow(object):
         self.stateTimerLCD.setStyleSheet("QLCDNumber{\n" "\n" "background-color:black;\n" "}")
         self.stateTimerLCD.setObjectName("stateTimerLCD")
 
-        
         self.label_Logo = QtWidgets.QLabel(self.centralwidget)
         self.pixmap = QPixmap('GUI_Logo.png') #Remember to add your own path
         self.label_Logo.setPixmap(self.pixmap)
         self.label_Logo.setGeometry(QtCore.QRect(40, 450, 900, 500))
 
-        self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_2.setGeometry(QtCore.QRect(460, 85, 101, 28))
-        self.textBrowser_2.setObjectName("textBrowser_2")
-        self.textBrowser_2.setStyleSheet("background-color: white;")
+        #Temperature Readings
+
+        self.PodTempReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.PodTempReading.setGeometry(QtCore.QRect(460, 85, 101, 28))
+        self.PodTempReading.setObjectName("PodTempReading")
+        self.PodTempReading.setStyleSheet("background-color: white;")
         
-        self.textBrowser_3 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_3.setGeometry(QtCore.QRect(460, 115, 101, 28))
-        self.textBrowser_3.setObjectName("textBrowser_3")
-        self.textBrowser_3.setStyleSheet("background-color: white;")
+        self.BrakesTempReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.BrakesTempReading.setGeometry(QtCore.QRect(460, 115, 101, 28))
+        self.BrakesTempReading.setObjectName("BrakesTempReading")
+        self.BrakesTempReading.setStyleSheet("background-color: white;")
         
-        self.textBrowser_5 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_5.setGeometry(QtCore.QRect(460, 145, 101, 28))
-        self.textBrowser_5.setObjectName("textBrowser_5")
-        self.textBrowser_5.setStyleSheet("background-color: white;")
+        self.ClampTempReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.ClampTempReading.setGeometry(QtCore.QRect(460, 145, 101, 28))
+        self.ClampTempReading.setObjectName("ClampTempReading")
+        self.ClampTempReading.setStyleSheet("background-color: white;")
         
-        self.textBrowser_13 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_13.setGeometry(QtCore.QRect(460, 175, 101, 28))
-        self.textBrowser_13.setObjectName("textBrowser_13")
-        self.textBrowser_13.setStyleSheet("background-color: white;")
+        self.BatteryTempReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.BatteryTempReading.setGeometry(QtCore.QRect(460, 175, 101, 28))
+        self.BatteryTempReading.setObjectName("BatteryTempReading")
+        self.BatteryTempReading.setStyleSheet("background-color: white;")
           
         self.TemperatureLabel = QtWidgets.QLabel(self.centralwidget)
         self.TemperatureLabel.setGeometry(QtCore.QRect(370, 45, 175, 25))
@@ -195,20 +196,39 @@ class Ui_MainWindow(object):
         self.TemperatureLabel.setObjectName("TemperatureLabel")
         self.TemperatureLabel.setStyleSheet("background-color: white;")
         
-        self.textBrowser_4 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_4.setGeometry(QtCore.QRect(775, 115, 101, 28))
-        self.textBrowser_4.setObjectName("textBrowser_4")
-        self.textBrowser_4.setStyleSheet("background-color: white;")
+        #IMU labels
         
-        self.textBrowser_6 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_6.setGeometry(QtCore.QRect(775, 85, 101, 28))
-        self.textBrowser_6.setStyleSheet("background-color: white;")
-        self.textBrowser_6.setObjectName("textBrowser_6")
+        self.AccelLabel = QtWidgets.QLabel(self.centralwidget)
+        self.AccelLabel.setGeometry(QtCore.QRect(650, 145, 121, 28))
+        self.AccelLabel.setObjectName("AccelLabel")
+        self.AccelLabel.setStyleSheet("background-color: white;")
         
-        self.textBrowser_7 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_7.setGeometry(QtCore.QRect(775, 145, 101, 28))
-        self.textBrowser_7.setObjectName("textBrowser_7")
-        self.textBrowser_7.setStyleSheet("background-color: white")
+        self.DistanceLabel = QtWidgets.QLabel(self.centralwidget)
+        self.DistanceLabel.setGeometry(QtCore.QRect(650, 85, 121, 28))
+        self.DistanceLabel.setObjectName("DistanceLabel")
+        self.DistanceLabel.setStyleSheet("background-color: white;")
+        
+        self.VelocityLabel = QtWidgets.QLabel(self.centralwidget)
+        self.VelocityLabel.setGeometry(QtCore.QRect(650, 115, 121, 28))
+        self.VelocityLabel.setObjectName("VelocityLabel")
+        self.VelocityLabel.setStyleSheet("background-color: white;")
+        
+        #IMU Readings
+    
+        self.VelocityReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.VelocityReading.setGeometry(QtCore.QRect(775, 115, 101, 28))
+        self.VelocityReading.setObjectName("VelocityReading")
+        self.VelocityReading.setStyleSheet("background-color: white;")
+        
+        self.DistanceReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.DistanceReading.setGeometry(QtCore.QRect(775, 85, 101, 28))
+        self.DistanceReading.setStyleSheet("background-color: white;")
+        self.DistanceReading.setObjectName("DistanceReading")
+        
+        self.AccelReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.AccelReading .setGeometry(QtCore.QRect(775, 145, 101, 28))
+        self.AccelReading .setObjectName("AccelReading ")
+        self.AccelReading .setStyleSheet("background-color: white")
         
         #Temperature labels
         
@@ -232,23 +252,7 @@ class Ui_MainWindow(object):
         self.BatteryTempLabel.setObjectName("BatteryTempLabel")
         self.BatteryTempLabel.setStyleSheet("background-color: white;")
         
-        #IMU labels
         
-        self.AccelLabel = QtWidgets.QLabel(self.centralwidget)
-        self.AccelLabel.setGeometry(QtCore.QRect(650, 145, 121, 28))
-        self.AccelLabel.setObjectName("AccelLabel")
-        self.AccelLabel.setStyleSheet("background-color: white;")
-        
-        self.DistanceLabel = QtWidgets.QLabel(self.centralwidget)
-        self.DistanceLabel.setGeometry(QtCore.QRect(650, 85, 121, 28))
-        self.DistanceLabel.setObjectName("DistanceLabel")
-        self.DistanceLabel.setStyleSheet("background-color: white;")
-        
-        self.VelocityLabel = QtWidgets.QLabel(self.centralwidget)
-        self.VelocityLabel.setGeometry(QtCore.QRect(650, 115, 121, 28))
-        self.VelocityLabel.setObjectName("VelocityLabel")
-        self.VelocityLabel.setStyleSheet("background-color: white;")
-
         self.IMULabel= QtWidgets.QLabel(self.centralwidget)
         self.IMULabel.setGeometry(QtCore.QRect(700, 45, 121, 25))
         font = QtGui.QFont()
@@ -260,7 +264,6 @@ class Ui_MainWindow(object):
         self.IMULabel.setAlignment(QtCore.Qt.AlignCenter)
         self.IMULabel.setObjectName("IMULabel")
         self.IMULabel.setStyleSheet("background-color: white;")
-        
         
         self.accelCounter=QtCore.QTimer()
         self.velocityCounter=QtCore.QTimer()
@@ -287,12 +290,7 @@ class Ui_MainWindow(object):
         self.RearRightLabel.setGeometry(QtCore.QRect(950, 175, 151, 28))
         self.RearRightLabel.setObjectName("RearRightLabel")
         self.RearRightLabel.setStyleSheet("background-color: white;")
-        
-        self.textBrowser_8 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_8.setGeometry(QtCore.QRect(1110, 145, 101, 28))
-        self.textBrowser_8.setObjectName("textBrowser_8")
-        self.textBrowser_8.setStyleSheet("background-color: white;")
-    
+
         self.LevitationLabel = QtWidgets.QLabel(self.centralwidget)
         self.LevitationLabel.setGeometry(QtCore.QRect(970, 45, 200, 25))
         font = QtGui.QFont()
@@ -304,29 +302,32 @@ class Ui_MainWindow(object):
         self.LevitationLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.LevitationLabel.setObjectName("LevitationLabel")
         self.LevitationLabel.setStyleSheet("background-color: white;")
+                
+        self.RearLeftReading  = QtWidgets.QTextBrowser(self.centralwidget)
+        self.RearLeftReading.setGeometry(QtCore.QRect(1110, 145, 101, 28))
+        self.RearLeftReading.setObjectName("RearLeftReading ")
+        self.RearLeftReading.setStyleSheet("background-color: white;")
         
-        self.textBrowser_9 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_9.setGeometry(QtCore.QRect(1110, 115, 101, 28))
-        self.textBrowser_9.setObjectName("textBrowser_9")
-        self.textBrowser_9.setStyleSheet("background-color: white;")
+        self.FrontRightReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.FrontRightReading.setGeometry(QtCore.QRect(1110, 115, 101, 28))
+        self.FrontRightReading.setObjectName("FrontRightReading")
+        self.FrontRightReading.setStyleSheet("background-color: white;")
         
-        self.textBrowser_10 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_10.setGeometry(QtCore.QRect(1110, 85, 101, 28))
-        self.textBrowser_10.setObjectName("textBrowser_10")
-        self.textBrowser_10.setStyleSheet("background-color: white;")
+        self.FrontLeftReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.FrontLeftReading.setGeometry(QtCore.QRect(1110, 85, 101, 28))
+        self.FrontLeftReading.setObjectName("FrontLeftReading")
+        self.FrontLeftReading.setStyleSheet("background-color: white;")
         
-        self.textBrowser_11 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_11.setGeometry(QtCore.QRect(1110, 175, 101, 28))
-        self.textBrowser_11.setObjectName("textBrowser_11")
-        self.textBrowser_11.setStyleSheet("background-color: white;")
+        self.RearRightReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.RearRightReading.setGeometry(QtCore.QRect(1110, 175, 101, 28))
+        self.RearRightReading.setObjectName("RearRightReading")
+        self.RearRightReading.setStyleSheet("background-color: white;")
         
-
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setGeometry(QtCore.QRect(310, 220, 921, 671))
         self.tabWidget.setObjectName("tabWidget")
         self.ModeTab = QtWidgets.QWidget()
         self.ModeTab.setObjectName("ModeTab")
-
         
         self.estopButton = QtWidgets.QPushButton(self.ModeTab,
                                                  clicked=lambda:self.openEstopWindow())
@@ -398,22 +399,21 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 579, 439))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         
-        self.textBrowser_12 = QtWidgets.QTextBrowser(self.scrollAreaWidgetContents)
+        self.LogHistoryBrowser = QtWidgets.QTextBrowser(self.scrollAreaWidgetContents)
         
-        self.textBrowser_12.moveCursor(QtGui.QTextCursor.End) #the self.scrollbar is the same as your self.console_window
+        self.LogHistoryBrowser.moveCursor(QtGui.QTextCursor.End) #the self.scrollbar is the same as your self.console_window
 
-        
-        self.textBrowser_12.setVerticalScrollBarPolicy(2)
-        self.textBrowser_12.setGeometry(QtCore.QRect(0, 0, 581, 441))
-        self.textBrowser_12.setObjectName("textBrowser_12")
-        self.textBrowser_12.setStyleSheet("background-color: white;")
+        self.LogHistoryBrowser.setVerticalScrollBarPolicy(2)
+        self.LogHistoryBrowser.setGeometry(QtCore.QRect(0, 0, 581, 441))
+        self.LogHistoryBrowser.setObjectName("LogHistoryBrowser")
+        self.LogHistoryBrowser.setStyleSheet("background-color: white;")
         
         self.Mode_logging.setWidget(self.scrollAreaWidgetContents)
         
-        self.textBrowser = QtWidgets.QTextBrowser(self.ModeTab)
-        self.textBrowser.setGeometry(QtCore.QRect(20, 70, 891, 31))
-        self.textBrowser.setStyleSheet("background-color: white;")
-        self.textBrowser.setObjectName("textBrowser")
+        self.PodModeReading = QtWidgets.QTextBrowser(self.ModeTab)
+        self.PodModeReading.setGeometry(QtCore.QRect(20, 70, 891, 31))
+        self.PodModeReading.setStyleSheet("background-color: white;")
+        self.PodModeReading.setObjectName("textBrowser")
         
         self.tabWidget.addTab(self.ModeTab, "")
         self.TeleopTab = QtWidgets.QWidget()
@@ -451,73 +451,68 @@ class Ui_MainWindow(object):
         self.TimeTotalLabel.setText(_translate("MainWindow", "Time (total)"))
         self.TimeStateLabel.setText(_translate("MainWindow", "Time (state)"))
         self.PodTempLabel.setText(_translate("MainWindow", "Pod:"))
-        self.textBrowser_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.PodTempReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))
         self.BrakesTempLabel.setText(_translate("MainWindow", "Brakes:"))
-        self.textBrowser_3.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.BrakesTempReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))
         self.TemperatureLabel.setText(_translate("MainWindow", "Temperature (°C)"))
-        self.textBrowser_5.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.ClampTempReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))
-        
-        self.textBrowser_13.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))   
+        self.BatteryTempReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))
-        
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))  
         self.ClampsTempLabel.setText(_translate("MainWindow", "Clamp:"))
         self.AccelLabel.setText(_translate("MainWindow", "Accel (m/s2):"))
-        self.textBrowser_4.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.VelocityReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">0</span></p></body></html>"))
-        self.textBrowser_6.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.DistanceReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">0</span></p></body></html>"))
-        self.textBrowser_7.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.AccelReading .setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">0</span></p></body></html>"))
         self.DistanceLabel.setText(_translate("MainWindow", "Distance (m):"))
-        
         self.IMULabel.setText(_translate("MainWindow", "IMU"))
         self.VelocityLabel.setText(_translate("MainWindow", "Velocity (m/s):"))
-        
-        
         self.RearLeftLabel.setText(_translate("MainWindow", "Rear Left:"))
         self.FrontRightLabel.setText(_translate("MainWindow", "Front Right:"))
-        self.textBrowser_8.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.RearLeftReading .setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">3</span></p></body></html>"))
         self.FrontLeftLabel.setText(_translate("MainWindow", "Front Left:"))
         self.LevitationLabel.setText(_translate("MainWindow", "Levitation (cm)"))
-        self.textBrowser_9.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.FrontRightReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">3</span></p></body></html>"))
-        self.textBrowser_10.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.FrontLeftReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">3</span></p></body></html>"))
-        self.textBrowser_11.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.RearRightReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
@@ -531,10 +526,9 @@ class Ui_MainWindow(object):
         self.changeStateButton.setText(_translate("MainWindow", "Change State"))
         self.LogLabel.setText(_translate("MainWindow", "Log"))
         
+        self.LogHistoryBrowser.setHtml(_translate("MainWindow",None))
         
-        self.textBrowser_12.setHtml(_translate("MainWindow",None))
-        
-        self.textBrowser.setHtml(_translate("MainWindow", ""))
+        self.PodModeReading.setHtml(_translate("MainWindow", ""))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ModeTab), _translate("MainWindow", "Mode"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.TeleopTab), _translate("MainWindow", "Teleop"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.LowSpeedTab), _translate("MainWindow", "Low Speed"))

@@ -23,6 +23,8 @@ class Ui_statesWindow(object):
         timer = self.ui.time
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
+        
+        
         m, s = divmod(timer, 60)
         
 
@@ -34,8 +36,8 @@ class Ui_statesWindow(object):
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         
-        self.ui.textBrowser.setText(TextButton)
-        self.ui.textBrowser_12.insertPlainText(log)
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.insertPlainText(log)
 
 
     def setInitState(self,main_w,MainWindow,log):
@@ -53,8 +55,8 @@ class Ui_statesWindow(object):
         self.ui.computeDistance()
         self.ui.computeAccel()
         
-        self.ui.textBrowser.setText(TextButton)
-        self.ui.textBrowser_12.insertPlainText(log)
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.insertPlainText(log)
         
     def setDriveState(self,main_w,MainWindow,log):
         TextButton= self.DriveButton_DS.text()
@@ -69,8 +71,8 @@ class Ui_statesWindow(object):
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Driving...\n"
         self.ui.updateLogList(log)
                 
-        self.ui.textBrowser.setText(TextButton)
-        self.ui.textBrowser_12.insertPlainText(log)
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.insertPlainText(log)
         
         
     def setPreArmState(self,main_w,MainWindow,log):
@@ -87,8 +89,8 @@ class Ui_statesWindow(object):
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Prearming...\n"
         self.ui.updateLogList(log)
                 
-        self.ui.textBrowser.setText(TextButton)
-        self.ui.textBrowser_12.insertPlainText(log)
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.insertPlainText(log)
 
         
     def setArmState(self,main_w,MainWindow,log):
@@ -105,8 +107,8 @@ class Ui_statesWindow(object):
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Arming...\n"
         self.ui.updateLogList(log)
                 
-        self.ui.textBrowser.setText(TextButton)
-        self.ui.textBrowser_12.insertPlainText(log)
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.insertPlainText(log)
 
 
     def setLaunchState(self,main_w,MainWindow,log):
@@ -123,8 +125,8 @@ class Ui_statesWindow(object):
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Launching...\n"
         self.ui.updateLogList(log)
                 
-        self.ui.textBrowser.setText(TextButton)
-        self.ui.textBrowser_12.insertPlainText(log)
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.insertPlainText(log)
 
   
     def setFlightState(self,main_w,MainWindow,log):
@@ -141,8 +143,8 @@ class Ui_statesWindow(object):
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Setting Flight State...\n"
         self.ui.updateLogList(log)
                 
-        self.ui.textBrowser.setText(TextButton)
-        self.ui.textBrowser_12.insertPlainText(log)
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.insertPlainText(log)
 
         
     def setSoftStop(self,main_w,MainWindow,log):
@@ -159,8 +161,8 @@ class Ui_statesWindow(object):
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Soft Stopping...\n"
         self.ui.updateLogList(log)
                 
-        self.ui.textBrowser.setText(TextButton)
-        self.ui.textBrowser_12.insertPlainText(log)
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.insertPlainText(log)
 
 
     def setupUi(self, statesWindow, Ui_MainWindow, MainWindow,log,timer):
