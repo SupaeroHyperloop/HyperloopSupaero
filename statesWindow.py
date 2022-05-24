@@ -24,9 +24,7 @@ class Ui_statesWindow(object):
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         
-        
         m, s = divmod(timer, 60)
-        
 
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Predriving...\n"
         
@@ -84,7 +82,6 @@ class Ui_statesWindow(object):
         self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         m, s = divmod(timer, 60)
-        
 
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Prearming...\n"
         self.ui.updateLogList(log)
@@ -103,7 +100,6 @@ class Ui_statesWindow(object):
         self.ui.setStateTimer()
         m, s = divmod(timer, 60)
         
-
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Arming...\n"
         self.ui.updateLogList(log)
                 
@@ -121,7 +117,6 @@ class Ui_statesWindow(object):
         self.ui.setStateTimer()
         m, s = divmod(timer, 60)
         
-
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Launching...\n"
         self.ui.updateLogList(log)
                 

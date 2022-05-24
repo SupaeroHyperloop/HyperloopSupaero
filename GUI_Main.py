@@ -9,7 +9,7 @@ Created on Thu Mar 31 15:03:37 2022
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
 import sys
-import time
+
 
 #---Add paths of python files here----#
 sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/statesWindow.py') 
@@ -21,12 +21,14 @@ from statesWindow import Ui_statesWindow
 from estopWindow import Ui_estopWindow
 from shutdownWindow import Ui_shutdownWindow
 
+
+    
 class Ui_MainWindow(object):
 
     def __init__(self):
+
         self.time =0.00000
         self.log = str()
-
 
     def openStatesWindow(self):
         self.window=QtWidgets.QMainWindow()
@@ -45,6 +47,10 @@ class Ui_MainWindow(object):
         self.ui=Ui_shutdownWindow()
         self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow)
         self.window.show()
+        
+        
+        
+#-----------Set clock and update Log of UI --------------------#        
 
     def setTotalTimer(self,timer):
         if timer is None:
@@ -65,12 +71,6 @@ class Ui_MainWindow(object):
         
     def getTotalTimer(self):
         return self.time
-    
-    def updateLogList(self, logList):
-        self.log = logList
-    
-    def getLogList(self):
-        return self.log
         
     def setStateTimer(self):
         self.timeState= 0.000
@@ -81,8 +81,17 @@ class Ui_MainWindow(object):
         
     def setStateTimeLCD(self):    
         self.timeState += 0.05
-        self.stateTimerLCD.display("{:.2f}".format(self.timeState))    
+        self.stateTimerLCD.display("{:.2f}".format(self.timeState))  
         
+    def updateLogList(self, logList):
+        self.log = logList
+    
+    def getLogList(self):
+        return self.log
+        
+        
+#-----------Simulation of the pod --------------------#   
+  
     def computeAccel(self):
         self.computedAccel= 0.000
         self.accelCounter.setInterval(1000)
@@ -113,6 +122,8 @@ class Ui_MainWindow(object):
         self.computedDistance+=0.5
         self.DistanceReading.setText("{:.2f}".format(self.computedDistance))
         
+#------------------------------------------------------#   
+        
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1265, 949)
@@ -142,6 +153,9 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setUnderline(True)
         font.setWeight(75)
+        
+        #Time Readings
+        
         self.TimeStateLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.TimeStateLabel.setFont(font)
         self.TimeStateLabel.setObjectName("TimeStateLabel")
@@ -323,11 +337,38 @@ class Ui_MainWindow(object):
         self.RearRightReading.setObjectName("RearRightReading")
         self.RearRightReading.setStyleSheet("background-color: white;")
         
+        # Tab Options
+        
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setGeometry(QtCore.QRect(310, 220, 921, 671))
         self.tabWidget.setObjectName("tabWidget")
         self.ModeTab = QtWidgets.QWidget()
         self.ModeTab.setObjectName("ModeTab")
+        
+        self.tabWidget.addTab(self.ModeTab, "")
+        self.TeleopTab = QtWidgets.QWidget()
+        self.TeleopTab.setObjectName("TeleopTab")
+        self.tabWidget.addTab(self.TeleopTab, "")
+        self.LowSpeedTab = QtWidgets.QWidget()
+        self.LowSpeedTab.setObjectName("LowSpeedTab")
+        self.tabWidget.addTab(self.LowSpeedTab, "")
+        self.CamFTab = QtWidgets.QWidget()
+        self.CamFTab.setObjectName("CamFTab")
+        self.tabWidget.addTab(self.CamFTab, "")
+        self.CamRTab = QtWidgets.QWidget()
+        self.CamRTab.setObjectName("CamRTab")
+        self.tabWidget.addTab(self.CamRTab, "")
+        self.NavTab = QtWidgets.QWidget()
+        self.NavTab.setObjectName("NavTab")
+        self.tabWidget.addTab(self.NavTab, "")
+        
+        # Enable scrolling option
+        
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 579, 439))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        
+        # Button Options
         
         self.estopButton = QtWidgets.QPushButton(self.ModeTab,
                                                  clicked=lambda:self.openEstopWindow())
@@ -392,45 +433,22 @@ class Ui_MainWindow(object):
         
         self.Mode_logging = QtWidgets.QScrollArea(self.ModeTab)
         self.Mode_logging.setGeometry(QtCore.QRect(330, 170, 581, 441))
-        
         self.Mode_logging.setWidgetResizable(True)
         self.Mode_logging.setObjectName("Mode_logging")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 579, 439))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.Mode_logging.setWidget(self.scrollAreaWidgetContents)
+        
         
         self.LogHistoryBrowser = QtWidgets.QTextBrowser(self.scrollAreaWidgetContents)
-        
         self.LogHistoryBrowser.moveCursor(QtGui.QTextCursor.End) #the self.scrollbar is the same as your self.console_window
-
         self.LogHistoryBrowser.setVerticalScrollBarPolicy(2)
         self.LogHistoryBrowser.setGeometry(QtCore.QRect(0, 0, 581, 441))
         self.LogHistoryBrowser.setObjectName("LogHistoryBrowser")
         self.LogHistoryBrowser.setStyleSheet("background-color: white;")
         
-        self.Mode_logging.setWidget(self.scrollAreaWidgetContents)
-        
         self.PodModeReading = QtWidgets.QTextBrowser(self.ModeTab)
         self.PodModeReading.setGeometry(QtCore.QRect(20, 70, 891, 31))
         self.PodModeReading.setStyleSheet("background-color: white;")
         self.PodModeReading.setObjectName("textBrowser")
-        
-        self.tabWidget.addTab(self.ModeTab, "")
-        self.TeleopTab = QtWidgets.QWidget()
-        self.TeleopTab.setObjectName("TeleopTab")
-        self.tabWidget.addTab(self.TeleopTab, "")
-        self.LowSpeedTab = QtWidgets.QWidget()
-        self.LowSpeedTab.setObjectName("LowSpeedTab")
-        self.tabWidget.addTab(self.LowSpeedTab, "")
-        self.CamFTab = QtWidgets.QWidget()
-        self.CamFTab.setObjectName("CamFTab")
-        self.tabWidget.addTab(self.CamFTab, "")
-        self.CamRTab = QtWidgets.QWidget()
-        self.CamRTab.setObjectName("CamRTab")
-        self.tabWidget.addTab(self.CamRTab, "")
-        self.NavTab = QtWidgets.QWidget()
-        self.NavTab.setObjectName("NavTab")
-        self.tabWidget.addTab(self.NavTab, "")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -450,92 +468,50 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.TimeTotalLabel.setText(_translate("MainWindow", "Time (total)"))
         self.TimeStateLabel.setText(_translate("MainWindow", "Time (state)"))
+        
         self.PodTempLabel.setText(_translate("MainWindow", "Pod:"))
-        self.PodTempReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))
+        self.PodTempReading.setHtml(_translate("MainWindow", "15"))
         self.BrakesTempLabel.setText(_translate("MainWindow", "Brakes:"))
-        self.BrakesTempReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))
+        self.BrakesTempReading.setHtml(_translate("MainWindow", "15"))
         self.TemperatureLabel.setText(_translate("MainWindow", "Temperature (°C)"))
-        self.ClampTempReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))   
-        self.BatteryTempReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">15</span></p></body></html>"))  
+        self.ClampTempReading.setHtml(_translate("MainWindow", "15"))   
+        self.BatteryTempReading.setHtml(_translate("MainWindow", "15"))  
         self.ClampsTempLabel.setText(_translate("MainWindow", "Clamp:"))
-        self.AccelLabel.setText(_translate("MainWindow", "Accel (m/s2):"))
-        self.VelocityReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">0</span></p></body></html>"))
-        self.DistanceReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">0</span></p></body></html>"))
-        self.AccelReading .setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">0</span></p></body></html>"))
-        self.DistanceLabel.setText(_translate("MainWindow", "Distance (m):"))
+        self.BatteryTempLabel.setText(_translate("MainWindow", "Battery:"))
+        
         self.IMULabel.setText(_translate("MainWindow", "IMU"))
+        self.DistanceLabel.setText(_translate("MainWindow", "Distance (m):"))
         self.VelocityLabel.setText(_translate("MainWindow", "Velocity (m/s):"))
+        self.AccelLabel.setText(_translate("MainWindow", "Accel (m/s2):"))
+        self.VelocityReading.setHtml(_translate("MainWindow", "0"))
+        self.DistanceReading.setHtml(_translate("MainWindow", "0"))
+        self.AccelReading .setHtml(_translate("MainWindow", "0"))
+
         self.RearLeftLabel.setText(_translate("MainWindow", "Rear Left:"))
         self.FrontRightLabel.setText(_translate("MainWindow", "Front Right:"))
-        self.RearLeftReading .setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">3</span></p></body></html>"))
         self.FrontLeftLabel.setText(_translate("MainWindow", "Front Left:"))
+        self.RearLeftReading .setHtml(_translate("MainWindow", "3"))
+
         self.LevitationLabel.setText(_translate("MainWindow", "Levitation (cm)"))
-        self.FrontRightReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">3</span></p></body></html>"))
-        self.FrontLeftReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">3</span></p></body></html>"))
-        self.RearRightReading.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:19pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'.SF NS Text\'; font-size:13pt;\">3</span></p></body></html>"))
+        self.FrontRightReading.setHtml(_translate("MainWindow", "3"))
+        self.FrontLeftReading.setHtml(_translate("MainWindow", "3"))
+        self.RearRightReading.setHtml(_translate("MainWindow", "3"))
         self.RearRightLabel.setText(_translate("MainWindow", "Rear Right:"))
-      
-        self.BatteryTempLabel.setText(_translate("MainWindow", "Battery:"))
+
         self.estopButton.setText(_translate("MainWindow", "ESTOP"))
         self.PodModeLabel.setText(_translate("MainWindow", "Pod Mode:"))
+        self.PodModeReading.setHtml(_translate("MainWindow", ""))
         self.shutdownButton.setText(_translate("MainWindow", "Shutdown"))
         self.changeStateButton.setText(_translate("MainWindow", "Change State"))
         self.LogLabel.setText(_translate("MainWindow", "Log"))
-        
         self.LogHistoryBrowser.setHtml(_translate("MainWindow",None))
         
-        self.PodModeReading.setHtml(_translate("MainWindow", ""))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ModeTab), _translate("MainWindow", "Mode"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.TeleopTab), _translate("MainWindow", "Teleop"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.LowSpeedTab), _translate("MainWindow", "Low Speed"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.CamFTab), _translate("MainWindow", "CamF"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.CamRTab), _translate("MainWindow", "CamR"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.NavTab), _translate("MainWindow", "Nav"))
-
 
 if __name__ == "__main__":
     import sys
