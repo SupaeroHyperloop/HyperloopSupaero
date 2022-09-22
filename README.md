@@ -11,5 +11,31 @@ The software will be used to build a robust graphical user interface (GUI) for t
 The software core sets out to fulfill the following requirements:
   
 **Lightweight Communications and Marshalling (LCM)**
-  * Ensure to effectively read and process information from the various sensors on-board the pod
+  * Ensure to effectively read and process information from the various sensors on-board the pod.
+  * Passing commands to the CAN bus.
+ 
+ **Sensors on-board the Hyperloop pod**
+ * Front Sensor Hub
+  - IMU accelerometer
+  - Friction brakes temperature
+  - Front-wheel temperature
+  - Photoelectric distance sensors
+  - MEMS-based 360 tilt sensor
+  - Front friction piston solenoid temperature
+
+ * Central Sensor Hub
+  - IMU accelerometer
+  - Liquid cooling pressure
+  - Battery current
+  - Battery temperature
+  - EC-brakes temperature
+  - Liquid cooling temperature IN and OUT
+
+  * Rear sensor Hub
+    - IMU accelerometer
+    - Rear-wheel temperature
+    - Photoelectric distance sensors
+    - Friction-drive motor temperature
+    - Rear friction solenoid temperature
+
   
