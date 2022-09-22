@@ -16,20 +16,20 @@ The software core sets out to fulfill the following requirements:
  
  **Sensors on-board the Hyperloop pod**
  * Front Sensor Hub
-  - IMU accelerometer
-  - Friction brakes temperature
-  - Front-wheel temperature
-  - Photoelectric distance sensors
-  - MEMS-based 360 tilt sensor
-  - Front friction piston solenoid temperature
+    - IMU accelerometer
+    - Friction brakes temperature
+    - Front-wheel temperature
+    - Photoelectric distance sensors
+    - MEMS-based 360 tilt sensor
+    - Front friction piston solenoid temperature
 
  * Central Sensor Hub
-  - IMU accelerometer
-  - Liquid cooling pressure
-  - Battery current
-  - Battery temperature
-  - EC-brakes temperature
-  - Liquid cooling temperature IN and OUT
+    - IMU accelerometer
+    - Liquid cooling pressure
+    - Battery current
+    - Battery temperature
+    - EC-brakes temperature
+    - Liquid cooling temperature IN and OUT
 
   * Rear sensor Hub
     - IMU accelerometer
