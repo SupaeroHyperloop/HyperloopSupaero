@@ -10,6 +10,6 @@ The software will be used to build a robust graphical user interface (GUI) for t
 
 The software core sets out to fulfill the following requirements:
   
-* Lightweight Communications and Marshalling (LCM) 
-  Ensure to effectively read and process information from the various sensors on-board the pod
+**Lightweight Communications and Marshalling (LCM)**
+  *Ensure to effectively read and process information from the various sensors on-board the pod
   
