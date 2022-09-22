@@ -4,7 +4,7 @@
 
 As the first French Hyperloop technology development team based at the Institut Supérieur de l’Aéronautique et de l’Espace in Toulouse, our main goal is to design and improve the current technology and infrastructure needed to implement a Hyperloop prototype, the transport of tomorrow.
 
-**GUI  and Control Commands**
+# GUI  and Control Commands
 
 The software will be used to build a robust graphical user interface (GUI) for the purpose of visualising the critical components of the pod’s operation. This section focuses on a general software infrastructure on which to base the Hyperloop Supaero design.
 
@@ -14,6 +14,7 @@ The software core sets out to fulfill the following requirements:
   * Ensure to effectively read and process information from the various sensors on-board the pod.
   * Passing commands to the CAN bus.
  
+ # Hardware
  **Sensors on-board the Hyperloop pod**
  * Front Sensor Hub
     - IMU accelerometer
