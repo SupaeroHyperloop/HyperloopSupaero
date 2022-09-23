@@ -12,9 +12,17 @@ The software core sets out to fulfill the following requirements:
   
 **Lightweight Communications and Marshalling (LCM)**
   * Ensure to effectively read and process information from the various sensors on-board the pod.
-  * Passing commands to the CAN bus.
+  * Messages must be passed to Master Controller which passes commands through a CAN bus configuration.
  
  # Hardware
+ **Controllers on-board the Hyperloop pod**
+ * Navigation Controller
+    Performs the position estimation calculations and data processing. This gives the vehicle controller the information needed to perform the control actions. 
+  * Vehicle controller
+    Main flight controller of the pod. It triggers emergency modes and constantly monitors motor performance. It commands all actuators on the pod.
+  * Power unit
+    Keeps a check on the health of the battery packs through the Battery Management System (BMS) and sensors for temperature, current and voltage. 
+
  **Sensors on-board the Hyperloop pod**
  * Front Sensor Hub
     - IMU accelerometer
