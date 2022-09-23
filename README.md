@@ -16,11 +16,11 @@ The software core sets out to fulfill the following requirements:
  
  # Hardware
  **Controllers on-board the Hyperloop pod**
- * *Navigation Controller*:
+ * **Navigation Controller**:
     Performs the position estimation calculations and data processing. This gives the vehicle controller the information needed to perform the control actions. 
-  * *Vehicle controller*:
+  * **Vehicle controller**:
     Main flight controller of the pod. It triggers emergency modes and constantly monitors motor performance. It commands all actuators on the pod.
-  * *Power unit*:
+  * **Power unit**:
     Keeps a check on the health of the battery packs through the Battery Management System (BMS) and sensors for temperature, current and voltage. 
 
  **Sensors on-board the Hyperloop pod**
