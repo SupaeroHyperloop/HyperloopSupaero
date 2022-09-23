@@ -1,6 +1,6 @@
 # HyperloopSupaero
 
-![HYPERLOOP](https://user-images.githubusercontent.com/97123368/157680947-9e6c7dbe-bec0-49dc-a396-6c6e3fa803e2.png | width=100)
+![HYPERLOOP](https://user-images.githubusercontent.com/97123368/157680947-9e6c7dbe-bec0-49dc-a396-6c6e3fa803e2.png| width=100)
 
 As the first French Hyperloop technology development team based at the Institut Supérieur de l’Aéronautique et de l’Espace in Toulouse, our main goal is to design and improve the current technology and infrastructure needed to implement a Hyperloop prototype, the transport of tomorrow.
 
