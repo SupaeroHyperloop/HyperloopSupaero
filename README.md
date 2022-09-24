@@ -34,6 +34,7 @@ The software core sets out to fulfill the following requirements:
 
  * Central Sensor Hub
     - IMU accelerometer
+    - Fiducial optical detector
     - Liquid cooling pressure
     - Battery current
     - Battery temperature
