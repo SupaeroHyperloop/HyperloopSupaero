@@ -3,6 +3,9 @@
 """
 - This is the estopwindow that will enable the pod to perform an emergancy stop during any state of the mission.
 - The brakes are closed and power relay is disabled to ensure the pod is stopped safely.
+
+* This interface is still currently in the development stage, so modifications to its design and functionality will be added overtime.
+
 @author: SupaeroHyperloop
 """
 
