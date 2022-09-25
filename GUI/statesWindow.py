@@ -11,6 +11,7 @@
     - Flight: The pod is coasting.
     - Soft Stop: Deccelerates the pod by gently closing the brakes.
     
+   * This interface is still currently in the development stage, so modifications to its design and functionality will be added overtime.
 
 @author: SupaeroHyperloop
 """
