@@ -4,6 +4,8 @@
 - This window allows the user to confirm their decision to perform a system shutdown.
 - When the pod transitions to the shutdown state, the failsafe brakes are triggered and the main pod battery will shut off.
 
+* This interface is still currently in the development stage, so modifications to its design and functionality will be added overtime.
+
 @author: SupaeroHyperloop
 """
 
