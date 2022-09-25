@@ -3,6 +3,11 @@
 """
 Created on Thu Mar 31 15:03:37 2022
 
+- This is the main window that will be used to display the key parameters recieved from the on-board sensors of the Hyperloop pod.
+- This window also enables you to launch the statesWindow where control commands can be accessed.
+- An emergancy stop or a total shutdown of the Hyperloop pod can be enabled by accessing the estopWindow and shutdownWindow respectively.
+- This interface is still currently in the development stage, so modifications to its design and functionality will be added overtime.
+
 @author: SupaeroHyperloop
 """
 
