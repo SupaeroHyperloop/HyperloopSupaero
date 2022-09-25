@@ -1,10 +1,19 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+- This is the  window that will be used to manually transition the pod to one of the possible states.
+    - Initialize: Done to initialise position of pod (x,y,z coordinates)
+    - Pre-drive:
+    - Drive:
+    - Pre-Arm: Pusher present, ready to arm
+    - Arm: Unlocks brakes and opens speed actuator and the pod is primed for launch
+    - Launch: Accelerates the pod which begins the missions on wheels before reaching the acquired velocity for magnetic levitation.
+    - Flight: The pod is coasting.
+    - Soft Stop: Deccelerates the pod by gently closing the brakes.
+    
 
-# Form implementation generated from reading ui file 'statesWindow.ui'
-#
-# Created by: PyQt5 UI code generator 5.9.2
-#
-# WARNING! All changes made in this file will be lost!
+@author: SupaeroHyperloop
+"""
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
