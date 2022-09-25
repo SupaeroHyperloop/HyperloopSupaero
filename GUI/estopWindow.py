@@ -1,10 +1,10 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'estopWindow.ui'
-#
-# Created by: PyQt5 UI code generator 5.9.2
-#
-# WARNING! All changes made in this file will be lost!
+"""
+- This is the estopwindow that will enable the pod to perform an emergancy stop during any state of the mission.
+- The brakes are closed and power relay is disabled to ensure the pod is stopped safely.
+@author: SupaeroHyperloop
+"""
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
