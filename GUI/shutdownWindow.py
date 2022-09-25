@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+"""
+- This window allows the user to confirm their decision to perform a system shutdown.
+- When the pod transitions to the shutdown state, the failsafe brakes are triggered and the main pod battery will shut off.
 
-# Form implementation generated from reading ui file 'shutdownWindow.ui'
-#
-# Created by: PyQt5 UI code generator 5.9.2
-#
-# WARNING! All changes made in this file will be lost!
+@author: SupaeroHyperloop
+"""
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
