@@ -12,9 +12,9 @@ import sys
 
 
 #---Add paths of python files here----#
-sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/statesWindow.py') 
-sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/estopWindow.py')
-sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/shutdownWindow.py')
+sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/GUI/statesWindow.py') 
+sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/GUI/estopWindow.py')
+sys.path.insert(1,'/Users/ronankeane/Desktop/HyperloopSupaero/GUI/shutdownWindow.py')
 
 
 from statesWindow import Ui_statesWindow
