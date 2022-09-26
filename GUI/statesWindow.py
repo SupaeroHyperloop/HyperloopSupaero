@@ -177,18 +177,25 @@ class Ui_statesWindow(object):
         Ui_MainWindow.setTotalTimer(timer)
         Ui_MainWindow.getLogList()
         statesWindow.resize(450, 344)
-        self.label = QtWidgets.QLabel(statesWindow)
-        self.label.setGeometry(QtCore.QRect(270, 40, 141, 31))
+        
+        self.FlightStateHeader = QtWidgets.QLabel(statesWindow)
+        self.FlightStateHeader.setGeometry(QtCore.QRect(290, 40, 141, 31))
         font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.label_2 = QtWidgets.QLabel(statesWindow)
-        self.label_2.setGeometry(QtCore.QRect(70, 40, 121, 41))
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+
+        self.FlightStateHeader.setFont(font)
+        self.FlightStateHeader.setObjectName("FlightStateHeader")
+        
+        self.DriveStateHeader = QtWidgets.QLabel(statesWindow)
+        self.DriveStateHeader.setGeometry(QtCore.QRect(80, 40, 121, 41))
         font = QtGui.QFont()
-        font.setPointSize(12)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.DriveStateHeader.setFont(font)
+        self.DriveStateHeader.setObjectName("DriveStateHeader")
         
         self.InitButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setInitState(Ui_MainWindow,MainWindow,log))
         self.InitButton_FS.clicked.connect(lambda:statesWindow.close())
@@ -236,13 +243,13 @@ class Ui_statesWindow(object):
     def retranslateUi(self, statesWindow):
         _translate = QtCore.QCoreApplication.translate
         statesWindow.setWindowTitle(_translate("statesWindow", "Dialog"))
-        self.label.setText(_translate("statesWindow", "FLIGHT STATES"))
-        self.label_2.setText(_translate("statesWindow", "DRIVE STATES"))
+        self.FlightStateHeader.setText(_translate("statesWindow", "FLIGHT STATES"))
+        self.DriveStateHeader.setText(_translate("statesWindow", "DRIVE STATES"))
 
         self.PreArmButton_FS.setText(_translate("statesWindow", "Pre-Arm"))
-        self.InitButton_FS.setText(_translate("statesWindow", "Initializing"))
+        self.InitButton_FS.setText(_translate("statesWindow", "Initialize"))
     
-        self.InitButton_FS.setText(_translate("statesWindow", "Initializing"))
+        self.InitButton_FS.setText(_translate("statesWindow", "Initialize"))
         self.PreArmButton_FS.setText(_translate("statesWindow", "Pre-Arm"))
 
         self.ArmButton_FS.setText(_translate("statesWindow", "Arm"))
