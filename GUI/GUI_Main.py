@@ -131,7 +131,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1265, 949)
-        MainWindow.setStyleSheet("background-color: darkblue;")
+        MainWindow.setStyleSheet("background-color: #1050a9;")
         font = QtGui.QFont()
         font.setPointSize(19)
         MainWindow.setFont(font)
@@ -176,9 +176,9 @@ class Ui_MainWindow(object):
         self.stateTimerLCD.setObjectName("stateTimerLCD")
 
         self.label_Logo = QtWidgets.QLabel(self.centralwidget)
-        self.pixmap = QPixmap('GUI_Logo.png') #Remember to add your own path
+        self.pixmap = QPixmap('HyperloopLabel.png').scaled(320, 200, QtCore.Qt.KeepAspectRatio,QtCore.Qt.SmoothTransformation) #Remember to add your own path
         self.label_Logo.setPixmap(self.pixmap)
-        self.label_Logo.setGeometry(QtCore.QRect(40, 450, 900, 500))
+        self.label_Logo.setGeometry(QtCore.QRect(5, 450, 900, 500))
 
         #Temperature Readings
 
@@ -217,56 +217,56 @@ class Ui_MainWindow(object):
         #IMU labels
         
         self.AccelLabel = QtWidgets.QLabel(self.centralwidget)
-        self.AccelLabel.setGeometry(QtCore.QRect(650, 145, 121, 28))
+        self.AccelLabel.setGeometry(QtCore.QRect(670, 145, 121, 28))
         self.AccelLabel.setObjectName("AccelLabel")
         self.AccelLabel.setStyleSheet("background-color: white;")
         
         self.DistanceLabel = QtWidgets.QLabel(self.centralwidget)
-        self.DistanceLabel.setGeometry(QtCore.QRect(650, 85, 121, 28))
+        self.DistanceLabel.setGeometry(QtCore.QRect(670, 85, 121, 28))
         self.DistanceLabel.setObjectName("DistanceLabel")
         self.DistanceLabel.setStyleSheet("background-color: white;")
         
         self.VelocityLabel = QtWidgets.QLabel(self.centralwidget)
-        self.VelocityLabel.setGeometry(QtCore.QRect(650, 115, 121, 28))
+        self.VelocityLabel.setGeometry(QtCore.QRect(670, 115, 121, 28))
         self.VelocityLabel.setObjectName("VelocityLabel")
         self.VelocityLabel.setStyleSheet("background-color: white;")
         
         #IMU Readings
     
         self.VelocityReading = QtWidgets.QTextBrowser(self.centralwidget)
-        self.VelocityReading.setGeometry(QtCore.QRect(775, 115, 101, 28))
+        self.VelocityReading.setGeometry(QtCore.QRect(795, 115, 101, 28))
         self.VelocityReading.setObjectName("VelocityReading")
         self.VelocityReading.setStyleSheet("background-color: white;")
         
         self.DistanceReading = QtWidgets.QTextBrowser(self.centralwidget)
-        self.DistanceReading.setGeometry(QtCore.QRect(775, 85, 101, 28))
+        self.DistanceReading.setGeometry(QtCore.QRect(795, 85, 101, 28))
         self.DistanceReading.setStyleSheet("background-color: white;")
         self.DistanceReading.setObjectName("DistanceReading")
         
         self.AccelReading = QtWidgets.QTextBrowser(self.centralwidget)
-        self.AccelReading .setGeometry(QtCore.QRect(775, 145, 101, 28))
+        self.AccelReading .setGeometry(QtCore.QRect(795, 145, 101, 28))
         self.AccelReading .setObjectName("AccelReading ")
         self.AccelReading .setStyleSheet("background-color: white")
         
         #Temperature labels
         
         self.PodTempLabel = QtWidgets.QLabel(self.centralwidget)
-        self.PodTempLabel.setGeometry(QtCore.QRect(340, 85, 81, 28))
+        self.PodTempLabel.setGeometry(QtCore.QRect(360, 85, 81, 28))
         self.PodTempLabel.setObjectName("PodTempLabel")
         self.PodTempLabel.setStyleSheet("background-color: white;")
         
         self.BrakesTempLabel = QtWidgets.QLabel(self.centralwidget)
-        self.BrakesTempLabel.setGeometry(QtCore.QRect(340, 115, 81, 28))
+        self.BrakesTempLabel.setGeometry(QtCore.QRect(360, 115, 81, 28))
         self.BrakesTempLabel.setObjectName("BrakesTempLabel")
         self.BrakesTempLabel.setStyleSheet("background-color: white;")
         
         self.ClampsTempLabel = QtWidgets.QLabel(self.centralwidget)
-        self.ClampsTempLabel.setGeometry(QtCore.QRect(340, 145, 81, 28))
+        self.ClampsTempLabel.setGeometry(QtCore.QRect(360, 145, 81, 28))
         self.ClampsTempLabel.setObjectName("ClampsTempLabel")
         self.ClampsTempLabel.setStyleSheet("background-color: white;")
         
         self.BatteryTempLabel = QtWidgets.QLabel(self.centralwidget)
-        self.BatteryTempLabel.setGeometry(QtCore.QRect(340, 175, 81, 28))
+        self.BatteryTempLabel.setGeometry(QtCore.QRect(360, 175, 81, 28))
         self.BatteryTempLabel.setObjectName("BatteryTempLabel")
         self.BatteryTempLabel.setStyleSheet("background-color: white;")
         
@@ -290,27 +290,27 @@ class Ui_MainWindow(object):
        # Levitation labels
         
         self.RearLeftLabel = QtWidgets.QLabel(self.centralwidget)
-        self.RearLeftLabel.setGeometry(QtCore.QRect(950, 145, 151, 28))
+        self.RearLeftLabel.setGeometry(QtCore.QRect(970, 145, 151, 28))
         self.RearLeftLabel.setObjectName("RearLeftLabel")
         self.RearLeftLabel.setStyleSheet("background-color: white;")
         
         self.FrontRightLabel = QtWidgets.QLabel(self.centralwidget)
-        self.FrontRightLabel.setGeometry(QtCore.QRect(950, 115, 151, 28))
+        self.FrontRightLabel.setGeometry(QtCore.QRect(970, 115, 151, 28))
         self.FrontRightLabel.setObjectName("FrontRightLabel")
         self.FrontRightLabel.setStyleSheet("background-color: white;")
         
         self.FrontLeftLabel = QtWidgets.QLabel(self.centralwidget)
-        self.FrontLeftLabel.setGeometry(QtCore.QRect(950, 85, 151, 28))
+        self.FrontLeftLabel.setGeometry(QtCore.QRect(970, 85, 151, 28))
         self.FrontLeftLabel.setObjectName("FrontLeftLabel")
         self.FrontLeftLabel.setStyleSheet("background-color: white;")
         
         self.RearRightLabel = QtWidgets.QLabel(self.centralwidget)
-        self.RearRightLabel.setGeometry(QtCore.QRect(950, 175, 151, 28))
+        self.RearRightLabel.setGeometry(QtCore.QRect(970, 175, 151, 28))
         self.RearRightLabel.setObjectName("RearRightLabel")
         self.RearRightLabel.setStyleSheet("background-color: white;")
 
         self.LevitationLabel = QtWidgets.QLabel(self.centralwidget)
-        self.LevitationLabel.setGeometry(QtCore.QRect(970, 45, 200, 25))
+        self.LevitationLabel.setGeometry(QtCore.QRect(990, 45, 200, 25))
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -322,29 +322,29 @@ class Ui_MainWindow(object):
         self.LevitationLabel.setStyleSheet("background-color: white;")
                 
         self.RearLeftReading  = QtWidgets.QTextBrowser(self.centralwidget)
-        self.RearLeftReading.setGeometry(QtCore.QRect(1110, 145, 101, 28))
+        self.RearLeftReading.setGeometry(QtCore.QRect(1130, 145, 101, 28))
         self.RearLeftReading.setObjectName("RearLeftReading ")
         self.RearLeftReading.setStyleSheet("background-color: white;")
         
         self.FrontRightReading = QtWidgets.QTextBrowser(self.centralwidget)
-        self.FrontRightReading.setGeometry(QtCore.QRect(1110, 115, 101, 28))
+        self.FrontRightReading.setGeometry(QtCore.QRect(1130, 115, 101, 28))
         self.FrontRightReading.setObjectName("FrontRightReading")
         self.FrontRightReading.setStyleSheet("background-color: white;")
         
         self.FrontLeftReading = QtWidgets.QTextBrowser(self.centralwidget)
-        self.FrontLeftReading.setGeometry(QtCore.QRect(1110, 85, 101, 28))
+        self.FrontLeftReading.setGeometry(QtCore.QRect(1130, 85, 101, 28))
         self.FrontLeftReading.setObjectName("FrontLeftReading")
         self.FrontLeftReading.setStyleSheet("background-color: white;")
         
         self.RearRightReading = QtWidgets.QTextBrowser(self.centralwidget)
-        self.RearRightReading.setGeometry(QtCore.QRect(1110, 175, 101, 28))
+        self.RearRightReading.setGeometry(QtCore.QRect(1130, 175, 101, 28))
         self.RearRightReading.setObjectName("RearRightReading")
         self.RearRightReading.setStyleSheet("background-color: white;")
         
         # Tab Options
         
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(310, 220, 921, 671))
+        self.tabWidget.setGeometry(QtCore.QRect(330, 220, 921, 671))
         self.tabWidget.setObjectName("tabWidget")
         self.ModeTab = QtWidgets.QWidget()
         self.ModeTab.setObjectName("ModeTab")
