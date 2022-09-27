@@ -16,9 +16,9 @@ import sys
 
 
 #---Add paths of python files here----#
-sys.path.insert(1,'/HyperloopSupaero/GUI/statesWindow.py') 
-sys.path.insert(1,'/HyperloopSupaero/GUI/estopWindow.py')
-sys.path.insert(1,'/HyperloopSupaero/GUI/shutdownWindow.py')
+sys.path.insert(1,'statesWindow.py') 
+sys.path.insert(1,'estopWindow.py')
+sys.path.insert(1,'shutdownWindow.py')
 
 
 from statesWindow import Ui_statesWindow
@@ -130,7 +130,7 @@ class Ui_MainWindow(object):
         
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1265, 949)
+        MainWindow.resize(1465, 1049)
         MainWindow.setStyleSheet("background-color: #1050a9;")
         font = QtGui.QFont()
         font.setPointSize(19)
@@ -344,7 +344,7 @@ class Ui_MainWindow(object):
         # Tab Options
         
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(330, 220, 921, 671))
+        self.tabWidget.setGeometry(QtCore.QRect(330, 220, 921, 601))
         self.tabWidget.setObjectName("tabWidget")
         self.ModeTab = QtWidgets.QWidget()
         self.ModeTab.setObjectName("ModeTab")
@@ -369,9 +369,9 @@ class Ui_MainWindow(object):
         # Enable scrolling option
         
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 579, 439))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 579, 309))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        
+
         # Button Options
         
         self.estopButton = QtWidgets.QPushButton(self.ModeTab,
@@ -428,7 +428,7 @@ class Ui_MainWindow(object):
         self.changeStateButton.setStyleSheet("background-color: gray;")
         
         self.LogLabel = QtWidgets.QLabel(self.ModeTab)
-        self.LogLabel.setGeometry(QtCore.QRect(330, 130, 581, 41))
+        self.LogLabel.setGeometry(QtCore.QRect(330, 170, 581, 381))
         self.LogLabel.setFont(font)
         self.LogLabel.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.LogLabel.setAlignment(QtCore.Qt.AlignCenter)
@@ -436,16 +436,15 @@ class Ui_MainWindow(object):
         self.LogLabel.setStyleSheet("background-color: gray;")
         
         self.Mode_logging = QtWidgets.QScrollArea(self.ModeTab)
-        self.Mode_logging.setGeometry(QtCore.QRect(330, 170, 581, 441))
+        self.Mode_logging.setGeometry(QtCore.QRect(330, 170, 581, 381))
         self.Mode_logging.setWidgetResizable(True)
         self.Mode_logging.setObjectName("Mode_logging")
         self.Mode_logging.setWidget(self.scrollAreaWidgetContents)
         
-        
         self.LogHistoryBrowser = QtWidgets.QTextBrowser(self.scrollAreaWidgetContents)
         self.LogHistoryBrowser.moveCursor(QtGui.QTextCursor.End) #the self.scrollbar is the same as your self.console_window
         self.LogHistoryBrowser.setVerticalScrollBarPolicy(2)
-        self.LogHistoryBrowser.setGeometry(QtCore.QRect(0, 0, 581, 441))
+        self.LogHistoryBrowser.setGeometry(QtCore.QRect(0, 0, 581, 301))
         self.LogHistoryBrowser.setObjectName("LogHistoryBrowser")
         self.LogHistoryBrowser.setStyleSheet("background-color: white;")
         
