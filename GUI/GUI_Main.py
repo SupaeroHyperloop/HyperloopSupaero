@@ -207,12 +207,12 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
-        font.setUnderline(True)
+
         font.setWeight(75)
         self.TemperatureLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.TemperatureLabel.setFont(font)
         self.TemperatureLabel.setObjectName("TemperatureLabel")
-        self.TemperatureLabel.setStyleSheet("background-color: white;")
+        self.TemperatureLabel.setStyleSheet("background-color: grey;")
         
         #IMU labels
         
@@ -276,12 +276,11 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
-        font.setUnderline(True)
         font.setWeight(75)
         self.IMULabel.setFont(font)
         self.IMULabel.setAlignment(QtCore.Qt.AlignCenter)
         self.IMULabel.setObjectName("IMULabel")
-        self.IMULabel.setStyleSheet("background-color: white;")
+        self.IMULabel.setStyleSheet("background-color: grey;")
         
         self.accelCounter=QtCore.QTimer()
         self.velocityCounter=QtCore.QTimer()
