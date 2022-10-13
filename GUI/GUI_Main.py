@@ -26,7 +26,7 @@ from estopWindow import Ui_estopWindow
 from shutdownWindow import Ui_shutdownWindow
 
 
-    
+# Hi this is Martin
 class Ui_MainWindow(object):
 
     def __init__(self):
