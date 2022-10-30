@@ -137,31 +137,37 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
-        self.TimeTotalLabel = QtWidgets.QLabel(self.centralwidget)
-        self.TimeTotalLabel.setGeometry(QtCore.QRect(10, 20, 171, 25))
+        
+                        
+        #Set font size for the labels
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
-        font.setUnderline(True)
         font.setWeight(75)
+        
+        #Set font size for the labels
+        font_head = QtGui.QFont()
+        font_head.setPointSize(20)
+        font_head.setBold(True)
+        font_head.setWeight(75)
+
+
+        self.TimeTotalLabel = QtWidgets.QLabel(self.centralwidget)
+        self.TimeTotalLabel.setGeometry(QtCore.QRect(10, 20, 171, 25))
         self.TimeTotalLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.TimeTotalLabel.setFont(font)
+        self.TimeTotalLabel.setFont(font_head)
         self.TimeTotalLabel.setObjectName("TimeTotalLabel")
         self.TimeTotalLabel.setStyleSheet("background-color: white;")
 
         self.TimeStateLabel = QtWidgets.QLabel(self.centralwidget)
         self.TimeStateLabel.setGeometry(QtCore.QRect(10, 60, 171, 25))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setUnderline(True)
-        font.setWeight(75)
+        
+        
         
         #Time Readings
         
         self.TimeStateLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.TimeStateLabel.setFont(font)
+        self.TimeStateLabel.setFont(font_head)
         self.TimeStateLabel.setObjectName("TimeStateLabel")
         self.TimeStateLabel.setStyleSheet("background-color: white;")
         
@@ -204,13 +210,9 @@ class Ui_MainWindow(object):
           
         self.TemperatureLabel = QtWidgets.QLabel(self.centralwidget)
         self.TemperatureLabel.setGeometry(QtCore.QRect(370, 45, 175, 25))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
 
-        font.setWeight(75)
         self.TemperatureLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.TemperatureLabel.setFont(font)
+        self.TemperatureLabel.setFont(font_head)
         self.TemperatureLabel.setObjectName("TemperatureLabel")
         self.TemperatureLabel.setStyleSheet("background-color: grey;")
         
@@ -273,11 +275,8 @@ class Ui_MainWindow(object):
         
         self.IMULabel= QtWidgets.QLabel(self.centralwidget)
         self.IMULabel.setGeometry(QtCore.QRect(700, 45, 121, 25))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
-        self.IMULabel.setFont(font)
+
+        self.IMULabel.setFont(font_head)
         self.IMULabel.setAlignment(QtCore.Qt.AlignCenter)
         self.IMULabel.setObjectName("IMULabel")
         self.IMULabel.setStyleSheet("background-color: grey;")
@@ -310,15 +309,10 @@ class Ui_MainWindow(object):
 
         self.LevitationLabel = QtWidgets.QLabel(self.centralwidget)
         self.LevitationLabel.setGeometry(QtCore.QRect(990, 45, 200, 25))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setUnderline(True)
-        font.setWeight(75)
-        self.LevitationLabel.setFont(font)
+        self.LevitationLabel.setFont(font_head)
         self.LevitationLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.LevitationLabel.setObjectName("LevitationLabel")
-        self.LevitationLabel.setStyleSheet("background-color: white;")
+        self.LevitationLabel.setStyleSheet("background-color: grey;")
                 
         self.RearLeftReading  = QtWidgets.QTextBrowser(self.centralwidget)
         self.RearLeftReading.setGeometry(QtCore.QRect(1130, 145, 101, 28))
@@ -355,12 +349,6 @@ class Ui_MainWindow(object):
         self.LowSpeedTab = QtWidgets.QWidget()
         self.LowSpeedTab.setObjectName("LowSpeedTab")
         self.tabWidget.addTab(self.LowSpeedTab, "")
-        self.CamFTab = QtWidgets.QWidget()
-        self.CamFTab.setObjectName("CamFTab")
-        self.tabWidget.addTab(self.CamFTab, "")
-        self.CamRTab = QtWidgets.QWidget()
-        self.CamRTab.setObjectName("CamRTab")
-        self.tabWidget.addTab(self.CamRTab, "")
         self.NavTab = QtWidgets.QWidget()
         self.NavTab.setObjectName("NavTab")
         self.tabWidget.addTab(self.NavTab, "")
@@ -377,10 +365,6 @@ class Ui_MainWindow(object):
                                                  clicked=lambda:self.openEstopWindow())
         self.estopButton.setGeometry(QtCore.QRect(40, 200, 221, 61))
         self.estopButton.setBaseSize(QtCore.QSize(100, 100))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
         self.estopButton.setFont(font)
         self.estopButton.setAutoFillBackground(True)
         self.estopButton.setAutoDefault(False)
@@ -390,23 +374,17 @@ class Ui_MainWindow(object):
         self.PodModeLabel = QtWidgets.QLabel(self.ModeTab)
         self.PodModeLabel.setGeometry(QtCore.QRect(20, 20, 181, 41))
         self.PodModeLabel.setObjectName("PodModeLabel")
-        font = QtGui.QFont()
-        font.setPointSize(22)
-        font.setBold(True)
-        font.setUnderline(True)
-        font.setWeight(75)
         self.PodModeLabel.setFont(font)
         self.PodModeLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.PodModeLabel.setStyleSheet("background-color: white;")
+        
+
         
         self.shutdownButton = QtWidgets.QPushButton(self.ModeTab,
                                     clicked=lambda: self.openShutdownWindow())
         self.shutdownButton.setGeometry(QtCore.QRect(40, 261, 221, 61))
         self.shutdownButton.setBaseSize(QtCore.QSize(100, 100))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
+
         self.shutdownButton.setFont(font)
         self.shutdownButton.setAutoFillBackground(True)
         self.shutdownButton.setAutoDefault(False)
@@ -417,10 +395,6 @@ class Ui_MainWindow(object):
                                     clicked=lambda: self.openStatesWindow())
         self.changeStateButton.setGeometry(QtCore.QRect(40, 140, 221, 61))
         self.changeStateButton.setBaseSize(QtCore.QSize(100, 100))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
         self.changeStateButton.setFont(font)
         self.changeStateButton.setAutoDefault(False)
         self.changeStateButton.setObjectName("changeStateButton")
@@ -511,8 +485,6 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ModeTab), _translate("MainWindow", "Mode"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.TeleopTab), _translate("MainWindow", "Teleop"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.LowSpeedTab), _translate("MainWindow", "Low Speed"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.CamFTab), _translate("MainWindow", "CamF"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.CamRTab), _translate("MainWindow", "CamR"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.NavTab), _translate("MainWindow", "Nav"))
 
 if __name__ == "__main__":
