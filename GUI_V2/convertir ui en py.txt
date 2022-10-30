@@ -1,0 +1,19 @@
+*CONVERTIR .UI EN .PY:
+
+	DESDE EL COMMAND DE ANACONDA:
+
+	(base) C:\Users\narci\Desktop\Hyperloop\GUI>pyuic5 MainWindowHyperloop.ui -o MainWindowHyperloop.py
+
+***************************************************
+*PARA VER LA VENTANA AÑADIR AL FINAL:
+
+	if __name__ == "__main__":
+    		import sys
+    		app = QtWidgets.QApplication(sys.argv)
+    		MainWindow = QtWidgets.QMainWindow()
+    		ui = Ui_MainWindow()
+    		ui.setupUi(MainWindow)
+    		MainWindow.show()
+    		sys.exit(app.exec_())
+
+***************************************************
