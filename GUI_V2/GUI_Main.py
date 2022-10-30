@@ -26,7 +26,46 @@ from estopWindow import Ui_estopWindow
 from shutdownWindow import Ui_shutdownWindow
 
 
-    
+### VARIABLES READ. THIS SHOULD BE IMPLEMENTED.
+
+batt1_cur=15
+batt1_volt=15
+batt1_charge=100
+batt1_temp=15
+
+batt2_cur=15
+batt2_volt=15
+batt2_charge=100
+batt2_temp=15
+
+temp_pod=15
+temp_brakes=15
+temp_clamp=15
+
+IMU_dist=0
+IMU_vel=0
+IMU_accel=0
+
+lev_fl=3
+lev_fr=3
+lev_rl=3
+lev_rr=3
+
+
+## WARNING VARIABLES.
+
+min_batt_charge = 20
+min_batt_volt=10
+max_batt_volt=20
+max_batt_temp=100
+max_pod_temp=100
+max_brakes_temp=100
+max_clamp_temp=100
+
+
+
+### GUI
+
 class Ui_MainWindow(object):
 
     def __init__(self):
@@ -137,7 +176,7 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
+        
         #Set font size for the labels
         font = QtGui.QFont()
         font.setPointSize(20)
@@ -147,17 +186,17 @@ class Ui_MainWindow(object):
         self.TimeTotalLabel = QtWidgets.QLabel(self.centralwidget)
         self.TimeTotalLabel.setGeometry(QtCore.QRect(10, 20, 171, 25))
         self.TimeTotalLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.TimeTotalLabel.setFont(font_head)
+        self.TimeTotalLabel.setFont(font)
         self.TimeTotalLabel.setObjectName("TimeTotalLabel")
         self.TimeTotalLabel.setStyleSheet("background-color: white;")
 
         self.TimeStateLabel = QtWidgets.QLabel(self.centralwidget)
         self.TimeStateLabel.setGeometry(QtCore.QRect(10, 60, 171, 25))
-         
+        
         #Time Readings
         
         self.TimeStateLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.TimeStateLabel.setFont(font_head)
+        self.TimeStateLabel.setFont(font)
         self.TimeStateLabel.setObjectName("TimeStateLabel")
         self.TimeStateLabel.setStyleSheet("background-color: white;")
         
@@ -176,33 +215,112 @@ class Ui_MainWindow(object):
         self.label_Logo.setPixmap(self.pixmap)
         self.label_Logo.setGeometry(QtCore.QRect(5, 450, 900, 500))
 
+        #Battery 1 Readings
+
+        self.Battery1CurReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.Battery1CurReading.setGeometry(QtCore.QRect(125, 180, 101, 28))
+        self.Battery1CurReading.setObjectName("Battery1CurReading")
+        self.Battery1CurReading.setStyleSheet("background-color: white;")
+        
+        self.Battery1VoltReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.Battery1VoltReading.setGeometry(QtCore.QRect(125, 210, 101, 28))
+        self.Battery1VoltReading.setObjectName("Battery1VoltReading")
+        if batt1_volt < min_batt_volt or batt1_volt > max_batt_volt:
+            self.Battery1VoltReading.setStyleSheet("background-color: red;")
+        else:
+            self.Battery1VoltReading.setStyleSheet("background-color: white;")
+        
+        self.Battery1ChargeReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.Battery1ChargeReading.setGeometry(QtCore.QRect(125, 240, 101, 28))
+        self.Battery1ChargeReading.setObjectName("Battery1ChargeReading")
+        if batt1_charge < min_batt_charge:
+            self.Battery1ChargeReading.setStyleSheet("background-color: red;")
+        else:
+            self.Battery1ChargeReading.setStyleSheet("background-color: white;")
+        
+        self.Battery1TempReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.Battery1TempReading.setGeometry(QtCore.QRect(125, 270, 101, 28))
+        self.Battery1TempReading.setObjectName("Battery1TempReading")
+        if batt1_temp > max_batt_temp or batt1_temp is None:
+            self.Battery1TempReading.setStyleSheet("background-color: red;")
+        else:
+            self.Battery1TempReading.setStyleSheet("background-color: white;")
+                         
+        self.Battery1Label = QtWidgets.QLabel(self.centralwidget)
+        self.Battery1Label.setGeometry(QtCore.QRect(35, 140, 175, 25))
+        self.Battery1Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Battery1Label.setFont(font)
+        self.Battery1Label.setObjectName("Battery1Label")
+        self.Battery1Label.setStyleSheet("background-color: grey;")
+        
+        #Battery 2 Readings
+
+        self.Battery2CurReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.Battery2CurReading.setGeometry(QtCore.QRect(125, 420, 101, 28))
+        self.Battery2CurReading.setObjectName("BatteryCurReading")
+        self.Battery2CurReading.setStyleSheet("background-color: white;")
+        
+        self.Battery2VoltReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.Battery2VoltReading.setGeometry(QtCore.QRect(125, 450, 101, 28))
+        self.Battery2VoltReading.setObjectName("Battery2VoltReading")
+        if batt2_volt < min_batt_volt or batt2_volt > max_batt_volt:
+            self.Battery2VoltReading.setStyleSheet("background-color: red;")
+        else:
+            self.Battery2VoltReading.setStyleSheet("background-color: white;")
+        
+        self.Battery2ChargeReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.Battery2ChargeReading.setGeometry(QtCore.QRect(125, 480, 101, 28))
+        self.Battery2ChargeReading.setObjectName("Battery2ChargeReading")
+        if batt2_charge < min_batt_charge:
+            self.Battery2ChargeReading.setStyleSheet("background-color: red;")
+        else:
+            self.Battery2ChargeReading.setStyleSheet("background-color: white;")
+        
+        self.Battery2TempReading = QtWidgets.QTextBrowser(self.centralwidget)
+        self.Battery2TempReading.setGeometry(QtCore.QRect(125, 510, 101, 28))
+        self.Battery2TempReading.setObjectName("Battery2TempReading")
+        if batt2_temp > max_batt_temp or batt2_temp is None:
+            self.Battery2TempReading.setStyleSheet("background-color: red;")
+        else:
+            self.Battery2TempReading.setStyleSheet("background-color: white;")
+                 
+        self.Battery2Label = QtWidgets.QLabel(self.centralwidget)
+        self.Battery2Label.setGeometry(QtCore.QRect(35, 380, 175, 25))
+        self.Battery2Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Battery2Label.setFont(font)
+        self.Battery2Label.setObjectName("Battery2Label")
+        self.Battery2Label.setStyleSheet("background-color: grey;")
+
         #Temperature Readings
 
         self.PodTempReading = QtWidgets.QTextBrowser(self.centralwidget)
         self.PodTempReading.setGeometry(QtCore.QRect(460, 85, 101, 28))
         self.PodTempReading.setObjectName("PodTempReading")
-        self.PodTempReading.setStyleSheet("background-color: white;")
+        if temp_pod > max_pod_temp or temp_pod is None:
+            self.PodTempReading.setStyleSheet("background-color: red;")
+        else:
+            self.PodTempReading.setStyleSheet("background-color: white;")
         
         self.BrakesTempReading = QtWidgets.QTextBrowser(self.centralwidget)
         self.BrakesTempReading.setGeometry(QtCore.QRect(460, 115, 101, 28))
         self.BrakesTempReading.setObjectName("BrakesTempReading")
-        self.BrakesTempReading.setStyleSheet("background-color: white;")
+        if temp_brakes > max_brakes_temp or temp_brakes is None:
+            self.BrakesTempReading.setStyleSheet("background-color: red;")
+        else:
+            self.BrakesTempReading.setStyleSheet("background-color: white;")
         
         self.ClampTempReading = QtWidgets.QTextBrowser(self.centralwidget)
         self.ClampTempReading.setGeometry(QtCore.QRect(460, 145, 101, 28))
         self.ClampTempReading.setObjectName("ClampTempReading")
-        self.ClampTempReading.setStyleSheet("background-color: white;")
-        
-        self.BatteryTempReading = QtWidgets.QTextBrowser(self.centralwidget)
-        self.BatteryTempReading.setGeometry(QtCore.QRect(460, 175, 101, 28))
-        self.BatteryTempReading.setObjectName("BatteryTempReading")
-        self.BatteryTempReading.setStyleSheet("background-color: white;")
-          
+        if temp_clamp > max_clamp_temp or temp_clamp is None:
+            self.ClampTempReading.setStyleSheet("background-color: red;")
+        else:
+            self.ClampTempReading.setStyleSheet("background-color: white;")
+               
         self.TemperatureLabel = QtWidgets.QLabel(self.centralwidget)
         self.TemperatureLabel.setGeometry(QtCore.QRect(370, 45, 175, 25))
-
         self.TemperatureLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.TemperatureLabel.setFont(font_head)
+        self.TemperatureLabel.setFont(font)
         self.TemperatureLabel.setObjectName("TemperatureLabel")
         self.TemperatureLabel.setStyleSheet("background-color: grey;")
         
@@ -239,6 +357,50 @@ class Ui_MainWindow(object):
         self.AccelReading .setGeometry(QtCore.QRect(795, 145, 101, 28))
         self.AccelReading .setObjectName("AccelReading ")
         self.AccelReading .setStyleSheet("background-color: white")
+
+        #Battery 1 labels
+        
+        self.Battery1CurLabel = QtWidgets.QLabel(self.centralwidget)
+        self.Battery1CurLabel.setGeometry(QtCore.QRect(25, 180, 81, 28))
+        self.Battery1CurLabel.setObjectName("Battery1CurLabel")
+        self.Battery1CurLabel.setStyleSheet("background-color: white;")
+        
+        self.Battery1VoltLabel = QtWidgets.QLabel(self.centralwidget)
+        self.Battery1VoltLabel.setGeometry(QtCore.QRect(25, 210, 81, 28))
+        self.Battery1VoltLabel.setObjectName("Battery1VoltLabel")
+        self.Battery1VoltLabel.setStyleSheet("background-color: white;")
+        
+        self.Battery1ChargeLabel = QtWidgets.QLabel(self.centralwidget)
+        self.Battery1ChargeLabel.setGeometry(QtCore.QRect(25, 240, 81, 28))
+        self.Battery1ChargeLabel.setObjectName("Battery1ChargeLabel")
+        self.Battery1ChargeLabel.setStyleSheet("background-color: white;")
+        
+        self.Battery1TempLabel = QtWidgets.QLabel(self.centralwidget)
+        self.Battery1TempLabel.setGeometry(QtCore.QRect(25, 270, 81, 28))
+        self.Battery1TempLabel.setObjectName("Battery1TempLabel")
+        self.Battery1TempLabel.setStyleSheet("background-color: white;")
+        
+        #Battery 2 labels
+        
+        self.Battery2CurLabel = QtWidgets.QLabel(self.centralwidget)
+        self.Battery2CurLabel.setGeometry(QtCore.QRect(25, 420, 81, 28))
+        self.Battery2CurLabel.setObjectName("Battery2CurLabel")
+        self.Battery2CurLabel.setStyleSheet("background-color: white;")
+        
+        self.Battery2VoltLabel = QtWidgets.QLabel(self.centralwidget)
+        self.Battery2VoltLabel.setGeometry(QtCore.QRect(25, 450, 81, 28))
+        self.Battery2VoltLabel.setObjectName("Battery2VoltLabel")
+        self.Battery2VoltLabel.setStyleSheet("background-color: white;")
+        
+        self.Battery2ChargeLabel = QtWidgets.QLabel(self.centralwidget)
+        self.Battery2ChargeLabel.setGeometry(QtCore.QRect(25, 480, 81, 28))
+        self.Battery2ChargeLabel.setObjectName("Battery2ChargeLabel")
+        self.Battery2ChargeLabel.setStyleSheet("background-color: white;")
+        
+        self.Battery2TempLabel = QtWidgets.QLabel(self.centralwidget)
+        self.Battery2TempLabel.setGeometry(QtCore.QRect(25, 510, 81, 28))
+        self.Battery2TempLabel.setObjectName("Battery2TempLabel")
+        self.Battery2TempLabel.setStyleSheet("background-color: white;")
         
         #Temperature labels
         
@@ -256,17 +418,11 @@ class Ui_MainWindow(object):
         self.ClampsTempLabel.setGeometry(QtCore.QRect(360, 145, 81, 28))
         self.ClampsTempLabel.setObjectName("ClampsTempLabel")
         self.ClampsTempLabel.setStyleSheet("background-color: white;")
-        
-        self.BatteryTempLabel = QtWidgets.QLabel(self.centralwidget)
-        self.BatteryTempLabel.setGeometry(QtCore.QRect(360, 175, 81, 28))
-        self.BatteryTempLabel.setObjectName("BatteryTempLabel")
-        self.BatteryTempLabel.setStyleSheet("background-color: white;")
-        
+              
         
         self.IMULabel= QtWidgets.QLabel(self.centralwidget)
         self.IMULabel.setGeometry(QtCore.QRect(700, 45, 121, 25))
-
-        self.IMULabel.setFont(font_head)
+        self.IMULabel.setFont(font)
         self.IMULabel.setAlignment(QtCore.Qt.AlignCenter)
         self.IMULabel.setObjectName("IMULabel")
         self.IMULabel.setStyleSheet("background-color: grey;")
@@ -299,7 +455,7 @@ class Ui_MainWindow(object):
 
         self.LevitationLabel = QtWidgets.QLabel(self.centralwidget)
         self.LevitationLabel.setGeometry(QtCore.QRect(990, 45, 200, 25))
-        self.LevitationLabel.setFont(font_head)
+        self.LevitationLabel.setFont(font)
         self.LevitationLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.LevitationLabel.setObjectName("LevitationLabel")
         self.LevitationLabel.setStyleSheet("background-color: grey;")
@@ -372,7 +528,6 @@ class Ui_MainWindow(object):
                                     clicked=lambda: self.openShutdownWindow())
         self.shutdownButton.setGeometry(QtCore.QRect(40, 261, 221, 61))
         self.shutdownButton.setBaseSize(QtCore.QSize(100, 100))
-
         self.shutdownButton.setFont(font)
         self.shutdownButton.setAutoFillBackground(True)
         self.shutdownButton.setAutoDefault(False)
@@ -383,6 +538,7 @@ class Ui_MainWindow(object):
                                     clicked=lambda: self.openStatesWindow())
         self.changeStateButton.setGeometry(QtCore.QRect(40, 140, 221, 61))
         self.changeStateButton.setBaseSize(QtCore.QSize(100, 100))
+
         self.changeStateButton.setFont(font)
         self.changeStateButton.setAutoDefault(False)
         self.changeStateButton.setObjectName("changeStateButton")
@@ -433,33 +589,51 @@ class Ui_MainWindow(object):
         self.TimeTotalLabel.setText(_translate("MainWindow", "Time (total)"))
         self.TimeStateLabel.setText(_translate("MainWindow", "Time (state)"))
         
-        self.PodTempLabel.setText(_translate("MainWindow", "Pod:"))
-        self.PodTempReading.setHtml(_translate("MainWindow", "15"))
-        self.BrakesTempLabel.setText(_translate("MainWindow", "Brakes:"))
-        self.BrakesTempReading.setHtml(_translate("MainWindow", "15"))
+        self.Battery1Label.setText(_translate("MainWindow", "Battery 1 (>50V)"))
+        self.Battery1CurLabel.setText(_translate("MainWindow", "Current:"))
+        self.Battery1CurReading.setHtml(_translate("MainWindow", str(batt1_cur)))
+        self.Battery1VoltLabel.setText(_translate("MainWindow", "Voltage:"))
+        self.Battery1VoltReading.setHtml(_translate("MainWindow", str(batt1_volt)))
+        self.Battery1ChargeLabel.setText(_translate("MainWindow", "State of charge(%):"))
+        self.Battery1ChargeReading.setHtml(_translate("MainWindow", str(batt1_charge)))
+        self.Battery1TempLabel.setText(_translate("MainWindow", "Temperature:"))
+        self.Battery1TempReading.setHtml(_translate("MainWindow", str(batt1_temp)))
+        
+        self.Battery2Label.setText(_translate("MainWindow", "Battery 2 (>50V)"))
+        self.Battery2CurLabel.setText(_translate("MainWindow", "Current:"))
+        self.Battery2CurReading.setHtml(_translate("MainWindow", str(batt2_cur)))
+        self.Battery2VoltLabel.setText(_translate("MainWindow", "Voltage:"))
+        self.Battery2VoltReading.setHtml(_translate("MainWindow", str(batt2_volt)))
+        self.Battery2ChargeLabel.setText(_translate("MainWindow", "State of charge(%):"))
+        self.Battery2ChargeReading.setHtml(_translate("MainWindow", str(batt2_charge)))       
+        self.Battery2TempLabel.setText(_translate("MainWindow", "Temperature:"))
+        self.Battery2TempReading.setHtml(_translate("MainWindow", str(batt2_temp)))
+        
         self.TemperatureLabel.setText(_translate("MainWindow", "Temperature (°C)"))
-        self.ClampTempReading.setHtml(_translate("MainWindow", "15"))   
-        self.BatteryTempReading.setHtml(_translate("MainWindow", "15"))  
+        self.PodTempLabel.setText(_translate("MainWindow", "Pod:"))
+        self.PodTempReading.setHtml(_translate("MainWindow", str(temp_pod)))
+        self.BrakesTempLabel.setText(_translate("MainWindow", "Brakes:"))
+        self.BrakesTempReading.setHtml(_translate("MainWindow", str(temp_brakes)))
+        self.ClampTempReading.setHtml(_translate("MainWindow", str(temp_clamp)))     
         self.ClampsTempLabel.setText(_translate("MainWindow", "Clamp:"))
-        self.BatteryTempLabel.setText(_translate("MainWindow", "Battery:"))
         
         self.IMULabel.setText(_translate("MainWindow", "IMU"))
         self.DistanceLabel.setText(_translate("MainWindow", "Distance (m):"))
         self.VelocityLabel.setText(_translate("MainWindow", "Velocity (m/s):"))
         self.AccelLabel.setText(_translate("MainWindow", "Accel (m/s2):"))
-        self.VelocityReading.setHtml(_translate("MainWindow", "0"))
-        self.DistanceReading.setHtml(_translate("MainWindow", "0"))
-        self.AccelReading .setHtml(_translate("MainWindow", "0"))
+        self.VelocityReading.setHtml(_translate("MainWindow", str(IMU_vel)))
+        self.DistanceReading.setHtml(_translate("MainWindow", str(IMU_dist)))
+        self.AccelReading .setHtml(_translate("MainWindow", str(IMU_accel)))
 
         self.RearLeftLabel.setText(_translate("MainWindow", "Rear Left:"))
         self.FrontRightLabel.setText(_translate("MainWindow", "Front Right:"))
         self.FrontLeftLabel.setText(_translate("MainWindow", "Front Left:"))
-        self.RearLeftReading .setHtml(_translate("MainWindow", "3"))
+        self.RearLeftReading .setHtml(_translate("MainWindow", str(lev_rl)))
 
         self.LevitationLabel.setText(_translate("MainWindow", "Levitation (cm)"))
-        self.FrontRightReading.setHtml(_translate("MainWindow", "3"))
-        self.FrontLeftReading.setHtml(_translate("MainWindow", "3"))
-        self.RearRightReading.setHtml(_translate("MainWindow", "3"))
+        self.FrontRightReading.setHtml(_translate("MainWindow", str(lev_fr)))
+        self.FrontLeftReading.setHtml(_translate("MainWindow", str(lev_fl)))
+        self.RearRightReading.setHtml(_translate("MainWindow", str(lev_rr)))
         self.RearRightLabel.setText(_translate("MainWindow", "Rear Right:"))
 
         self.estopButton.setText(_translate("MainWindow", "ESTOP"))
@@ -475,7 +649,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.LowSpeedTab), _translate("MainWindow", "Low Speed"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.NavTab), _translate("MainWindow", "Nav"))
 
-if __name__ == "__main__":
+if __name__ == "__main__":  ## PARA PODER RUNEAR EL CÓDIGO Y QUE APAREZCA LA VENTANA. NO LO DA EL QT DESIGNER.
     import sys
     log = str()
     app = QtWidgets.QApplication(sys.argv)
