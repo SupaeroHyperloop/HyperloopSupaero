@@ -6,7 +6,7 @@ As the first French Hyperloop technology development team based at the Institut 
 
 # GUI  and Control Commands
 
-The software will be used to build a robust graphical user interface (GUI) for the purpose of visualising the critical components of the pod’s operation. This section focuses on a general software infrastructure on which to base the Hyperloop Supaero design.
+The software shall be used to build a robust graphical user interface (GUI) for the purpose of visualising the critical components of the pod as well transmit control commands throughout the pod's operation. This section focuses on a general software infrastructure on which to base the Hyperloop Supaero design.
 
 The software core sets out to fulfill the following requirements:
   
