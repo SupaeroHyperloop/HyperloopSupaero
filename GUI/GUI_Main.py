@@ -30,7 +30,6 @@ from shutdownWindow import Ui_shutdownWindow
 class Ui_MainWindow(object):
 
     def __init__(self):
-
         self.time =0.00000
         self.log = str()
 
@@ -52,8 +51,6 @@ class Ui_MainWindow(object):
         self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow)
         self.window.show()
         
-        
-        
 #-----------Set clock and update Log of UI --------------------#        
 
     def setTotalTimer(self,timer):
@@ -72,6 +69,7 @@ class Ui_MainWindow(object):
         
         m, s = divmod(self.time, 60)
         self.totalTimerLCD.display('{:02d}:{:02d}'.format(int(m), int(s)))
+        del m, s
         
     def getTotalTimer(self):
         return self.time
@@ -83,8 +81,9 @@ class Ui_MainWindow(object):
         self.stateTime.timeout.connect(self.setStateTimeLCD)
         self.stateTime.start()
         
+        
     def setStateTimeLCD(self):    
-        self.timeState += 0.05
+        self.timeState = self.timeState + 0.05
         self.stateTimerLCD.display("{:.2f}".format(self.timeState))  
         
     def updateLogList(self, logList):
@@ -92,7 +91,6 @@ class Ui_MainWindow(object):
     
     def getLogList(self):
         return self.log
-        
         
 #-----------Simulation of the pod --------------------#   
   
@@ -147,7 +145,7 @@ class Ui_MainWindow(object):
         self.TimeTotalLabel = QtWidgets.QLabel(self.centralwidget)
         self.TimeTotalLabel.setGeometry(QtCore.QRect(10, 20, 171, 25))
         self.TimeTotalLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.TimeTotalLabel.setFont(font_head)
+        self.TimeTotalLabel.setFont(font)
         self.TimeTotalLabel.setObjectName("TimeTotalLabel")
         self.TimeTotalLabel.setStyleSheet("background-color: white;")
 
@@ -157,7 +155,7 @@ class Ui_MainWindow(object):
         #Time Readings
         
         self.TimeStateLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.TimeStateLabel.setFont(font_head)
+        self.TimeStateLabel.setFont(font)
         self.TimeStateLabel.setObjectName("TimeStateLabel")
         self.TimeStateLabel.setStyleSheet("background-color: white;")
         
@@ -202,7 +200,7 @@ class Ui_MainWindow(object):
         self.TemperatureLabel.setGeometry(QtCore.QRect(370, 45, 175, 25))
 
         self.TemperatureLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.TemperatureLabel.setFont(font_head)
+        self.TemperatureLabel.setFont(font)
         self.TemperatureLabel.setObjectName("TemperatureLabel")
         self.TemperatureLabel.setStyleSheet("background-color: grey;")
         
@@ -266,7 +264,7 @@ class Ui_MainWindow(object):
         self.IMULabel= QtWidgets.QLabel(self.centralwidget)
         self.IMULabel.setGeometry(QtCore.QRect(700, 45, 121, 25))
 
-        self.IMULabel.setFont(font_head)
+        self.IMULabel.setFont(font)
         self.IMULabel.setAlignment(QtCore.Qt.AlignCenter)
         self.IMULabel.setObjectName("IMULabel")
         self.IMULabel.setStyleSheet("background-color: grey;")
@@ -299,7 +297,7 @@ class Ui_MainWindow(object):
 
         self.LevitationLabel = QtWidgets.QLabel(self.centralwidget)
         self.LevitationLabel.setGeometry(QtCore.QRect(990, 45, 200, 25))
-        self.LevitationLabel.setFont(font_head)
+        self.LevitationLabel.setFont(font)
         self.LevitationLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.LevitationLabel.setObjectName("LevitationLabel")
         self.LevitationLabel.setStyleSheet("background-color: grey;")
@@ -356,8 +354,6 @@ class Ui_MainWindow(object):
         self.estopButton.setGeometry(QtCore.QRect(40, 200, 221, 61))
         self.estopButton.setBaseSize(QtCore.QSize(100, 100))
         self.estopButton.setFont(font)
-        self.estopButton.setAutoFillBackground(True)
-        self.estopButton.setAutoDefault(False)
         self.estopButton.setObjectName("estopButton")
         self.estopButton.setStyleSheet("background-color: gray;")
         
@@ -384,7 +380,6 @@ class Ui_MainWindow(object):
         self.changeStateButton.setGeometry(QtCore.QRect(40, 140, 221, 61))
         self.changeStateButton.setBaseSize(QtCore.QSize(100, 100))
         self.changeStateButton.setFont(font)
-        self.changeStateButton.setAutoDefault(False)
         self.changeStateButton.setObjectName("changeStateButton")
         self.changeStateButton.setStyleSheet("background-color: gray;")
         
