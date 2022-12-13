@@ -412,7 +412,7 @@ class StateMachine:
 		"""
 		transitioned_after = transitioned_before
 		if transitioned_after < 0:
-			if self.velocity >= 16:
+			if self.velocity >= 22:
 				self.__exit_sequence_main_push()
 				self.__enter_sequence_main_coast_default()
 				self.__react(0)
@@ -425,7 +425,9 @@ class StateMachine:
 		#If no transition was taken then execute local reactions
 		if transitioned_after == transitioned_before:
 			if self.__time_events[1]:
-				self.velocity = self.velocity + 2
+				self.
+				
+				= self.velocity + 4.2
 				self.distance = self.distance + self.velocity
 			transitioned_after = self.__react(transitioned_before)
 		return transitioned_after
@@ -450,7 +452,7 @@ class StateMachine:
 		#If no transition was taken then execute local reactions
 		if transitioned_after == transitioned_before:
 			if self.__time_events[3]:
-				self.velocity = self.velocity - 1
+				self.velocity = self.velocity - 6.9
 				self.distance = self.distance + self.velocity
 			transitioned_after = self.__react(transitioned_before)
 		return transitioned_after
