@@ -8,4 +8,4 @@
 	 cd ../HyperloopSupaero/GUI
 	 
 * Run GUI_Main using python3 in order to run pyqtgraph
-	 * python3 GUI_Main.py 
+* python3 GUI_Main.py 
