@@ -21,17 +21,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 
-class Ui_statesWindow(object):
-    
+class Ui_statesWindow(QtWidgets.QWidget):
 
-
-    def setPreDriveState(self,main_w,MainWindow,log):
+    def setPreDriveState(self,main_w,log):
         TextButton= self.PreDriveButton_DS.text()
         self.ui=main_w
-        self.ui.setupUi(MainWindow)
         
         timer = self.ui.time
-        self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         
         m, s = divmod(timer, 60)
@@ -39,26 +35,20 @@ class Ui_statesWindow(object):
         log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Predriving...\n"
         
         self.ui.updateLogList(log)
-        
         timer = self.ui.time
-        self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         
         self.ui.PodModeReading.setText(TextButton)
         self.ui.LogHistoryBrowser.insertPlainText(log)
 
-
-    def setInitState(self,main_w,MainWindow,log):
+    def setInitState(self,main_w,log):
         TextButton= self.InitButton_FS.text()
         self.ui=main_w
         
         log = log + "Initializing...\n"
         self.ui.updateLogList(log)
-        
-        self.ui.setupUi(MainWindow)
-        self.ui.setTotalTimer(None)
+        self.ui.startTotalTimer()
         self.ui.setStateTimer()
-
         self.ui.computeVelocity()
         self.ui.computeDistance()
         self.ui.computeAccel()
@@ -66,13 +56,11 @@ class Ui_statesWindow(object):
         self.ui.PodModeReading.setText(TextButton)
         self.ui.LogHistoryBrowser.insertPlainText(log)
         
-    def setDriveState(self,main_w,MainWindow,log):
+    def setDriveState(self,main_w,log):
         TextButton= self.DriveButton_DS.text()
         self.ui=main_w
-        self.ui.setupUi(MainWindow)
         
         timer = self.ui.time
-        self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         m, s = divmod(timer, 60)
         
@@ -83,13 +71,11 @@ class Ui_statesWindow(object):
         self.ui.LogHistoryBrowser.insertPlainText(log)
         
         
-    def setPreArmState(self,main_w,MainWindow,log):
+    def setPreArmState(self,main_w,log):
         TextButton= self.PreArmButton_FS.text()
         self.ui=main_w
-        self.ui.setupUi(MainWindow)
         
         timer = self.ui.time
-        self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         m, s = divmod(timer, 60)
 
@@ -100,13 +86,11 @@ class Ui_statesWindow(object):
         self.ui.LogHistoryBrowser.insertPlainText(log)
 
         
-    def setArmState(self,main_w,MainWindow,log):
+    def setArmState(self,main_w,log):
         TextButton= self.ArmButton_FS.text()
         self.ui=main_w
-        self.ui.setupUi(MainWindow)
         
         timer = self.ui.time
-        self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         m, s = divmod(timer, 60)
         
@@ -117,13 +101,12 @@ class Ui_statesWindow(object):
         self.ui.LogHistoryBrowser.insertPlainText(log)
 
 
-    def setLaunchState(self,main_w,MainWindow,log):
+    def setLaunchState(self,main_w,log):
         TextButton= self.LaunchButton_FS.text()
         self.ui=main_w
-        self.ui.setupUi(MainWindow)
+        
         
         timer = self.ui.time
-        self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         m, s = divmod(timer, 60)
         
@@ -134,13 +117,12 @@ class Ui_statesWindow(object):
         self.ui.LogHistoryBrowser.insertPlainText(log)
 
   
-    def setFlightState(self,main_w,MainWindow,log):
+    def setFlightState(self,main_w,log):
         TextButton= self.FlightButton_FS.text()
         self.ui=main_w
-        self.ui.setupUi(MainWindow)
+        
         
         timer = self.ui.time
-        self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         m, s = divmod(timer, 60)
         
@@ -152,13 +134,12 @@ class Ui_statesWindow(object):
         self.ui.LogHistoryBrowser.insertPlainText(log)
 
         
-    def setSoftStop(self,main_w,MainWindow,log):
+    def setSoftStop(self,main_w,log):
         TextButton= self.SoftStopButton_FS.text()
         self.ui=main_w
-        self.ui.setupUi(MainWindow)
+        
 
         timer = self.ui.time
-        self.ui.setTotalTimer(timer)
         self.ui.setStateTimer()
         m, s = divmod(timer, 60)
         
@@ -170,12 +151,10 @@ class Ui_statesWindow(object):
         self.ui.LogHistoryBrowser.insertPlainText(log)
 
 
-    def setupUi(self, statesWindow, Ui_MainWindow, MainWindow,log,timer):
+    def setupUi(self, statesWindow, Ui_MainWindow, log,timer):
         
         statesWindow.setObjectName("statesWindow")
-        
-        Ui_MainWindow.setTotalTimer(timer)
-        Ui_MainWindow.getLogList()
+
         statesWindow.resize(450, 344)
         
         self.FlightStateHeader = QtWidgets.QLabel(statesWindow)
@@ -197,42 +176,42 @@ class Ui_statesWindow(object):
         self.DriveStateHeader.setFont(font)
         self.DriveStateHeader.setObjectName("DriveStateHeader")
         
-        self.InitButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setInitState(Ui_MainWindow,MainWindow,log))
+        self.InitButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setInitState(Ui_MainWindow,log))
         self.InitButton_FS.clicked.connect(lambda:statesWindow.close())
         self.InitButton_FS.setGeometry(QtCore.QRect(290, 70, 93, 28))
         self.InitButton_FS.setObjectName("InitButton_FS")
         
-        self.PreArmButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setPreArmState(Ui_MainWindow,MainWindow,log))
+        self.PreArmButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setPreArmState(Ui_MainWindow,log))
         self.PreArmButton_FS.clicked.connect(lambda:statesWindow.close())
         self.PreArmButton_FS.setGeometry(QtCore.QRect(290, 110, 93, 28))
         self.PreArmButton_FS.setObjectName("PreArmButton_FS")
         
-        self.ArmButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setArmState(Ui_MainWindow,MainWindow,log))
+        self.ArmButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setArmState(Ui_MainWindow,log))
         self.ArmButton_FS.clicked.connect(lambda:statesWindow.close())
         self.ArmButton_FS.setGeometry(QtCore.QRect(290, 150, 93, 28))
         self.ArmButton_FS.setObjectName("ArmButton_FS")
         
-        self.LaunchButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setLaunchState(Ui_MainWindow,MainWindow,log))
+        self.LaunchButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setLaunchState(Ui_MainWindow,log))
         self.LaunchButton_FS.clicked.connect(lambda:statesWindow.close())
         self.LaunchButton_FS.setGeometry(QtCore.QRect(290, 190, 93, 28))
         self.LaunchButton_FS.setObjectName("LaunchButton_FS")
         
-        self.FlightButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setFlightState(Ui_MainWindow,MainWindow,log))
+        self.FlightButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setFlightState(Ui_MainWindow,log))
         self.FlightButton_FS.clicked.connect(lambda:statesWindow.close())
         self.FlightButton_FS.setGeometry(QtCore.QRect(290, 230, 93, 28))
         self.FlightButton_FS.setObjectName("FlightButton_FS")
         
-        self.SoftStopButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setSoftStop(Ui_MainWindow,MainWindow,log))
+        self.SoftStopButton_FS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setSoftStop(Ui_MainWindow,log))
         self.SoftStopButton_FS.clicked.connect(lambda:statesWindow.close())
         self.SoftStopButton_FS.setGeometry(QtCore.QRect(290, 270, 93, 28))
         self.SoftStopButton_FS.setObjectName("SoftStopButton_FS")
         
-        self.PreDriveButton_DS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setPreDriveState(Ui_MainWindow,MainWindow,log))
+        self.PreDriveButton_DS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setPreDriveState(Ui_MainWindow,log))
         self.PreDriveButton_DS.clicked.connect(lambda:statesWindow.close())
         self.PreDriveButton_DS.setGeometry(QtCore.QRect(80, 110, 93, 28))
         self.PreDriveButton_DS.setObjectName("PreDriveButton_DS")
         
-        self.DriveButton_DS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setDriveState(Ui_MainWindow,MainWindow,log))
+        self.DriveButton_DS = QtWidgets.QPushButton(statesWindow, clicked=lambda: self.setDriveState(Ui_MainWindow,log))
         self.DriveButton_DS.clicked.connect(lambda:statesWindow.close())
         self.DriveButton_DS.setGeometry(QtCore.QRect(80, 180, 93, 28))
         self.DriveButton_DS.setObjectName("DriveButton_DS")

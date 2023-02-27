@@ -12,15 +12,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_shutdownWindow(object):
-    def setShutdownState(self,main_w,MainWindow):
+    def setShutdownState(self,main_w):
         TextButton= 'Shutdown'
         self.ui=main_w
-        self.ui.setupUi(MainWindow)
         self.ui.textBrowser.setText(TextButton)
-    def setupUi(self, shutdownWindow,Ui_MainWindow,MainWindow):
+    def setupUi(self, shutdownWindow,Ui_MainWindow):
         shutdownWindow.setObjectName("shutdownWindow")
         shutdownWindow.resize(569, 300)
-        self.acceptbutton = QtWidgets.QPushButton(shutdownWindow, clicked=lambda: self.setShutdownState(Ui_MainWindow,MainWindow))
+        self.acceptbutton = QtWidgets.QPushButton(shutdownWindow, clicked=lambda: self.setShutdownState(Ui_MainWindow))
         self.acceptbutton.clicked.connect(lambda:shutdownWindow.close())
         self.acceptbutton.setGeometry(QtCore.QRect(170, 230, 93, 28))
         self.acceptbutton.setObjectName("acceptbutton")

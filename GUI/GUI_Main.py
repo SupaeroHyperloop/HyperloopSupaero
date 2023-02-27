@@ -42,7 +42,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         # create a timer to update the LCD number
         self.timeTotal = QtCore.QTimer()
         self.timeTotal.setInterval(50)  # update every 50 millisecond
-        self.timeTotal.timeout.connect(self.setTotalTimeLcdSignal)
+        self.timeTotal.timeout.connect(self.setTotalTimer)
         
         self.stateTime=QtCore.QTimer()
         self.stateTime.setInterval(50) # update every 50 millisecond
@@ -57,13 +57,13 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     def openEstopWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_estopWindow()
-        self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow)
+        self.ui.setupUi(self.window,Ui_MainWindow())
         self.window.show()
         
     def openShutdownWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_shutdownWindow()
-        self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow)
+        self.ui.setupUi(self.window,Ui_MainWindow())
         self.window.show()
         
 #-----------Set clock and update Log of UI --------------------# 
@@ -71,7 +71,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.timeTotal.start()
 
             
-    def setTotalTimeLcdSignal(self):   
+    def setTotalTimer(self):   
         self.time = self.time + 0.05
         m, s = divmod(self.time, 60)
         self.totalTimerLCD.display('{:02d}:{:02d}'.format(int(m), int(s)))

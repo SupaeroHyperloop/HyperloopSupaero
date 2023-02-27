@@ -12,13 +12,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_estopWindow(object):
-    def setESTOPstate(self,main_w,MainWindow):
+    def setESTOPstate(self,main_w):
         TextButton= 'ESTOP'
         self.ui=main_w
-        self.ui.setupUi(MainWindow)
+        
         self.ui.textBrowser.setText(TextButton)
         
-    def setupUi(self, estopWindow,Ui_MainWindow,MainWindow):
+    def setupUi(self, estopWindow,Ui_MainWindow):
         estopWindow.setObjectName("estopWindow")
         estopWindow.resize(546, 300)
         self.label = QtWidgets.QLabel(estopWindow)
@@ -28,7 +28,7 @@ class Ui_estopWindow(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         
-        self.acceptbutton = QtWidgets.QPushButton(estopWindow, clicked=lambda: self.setESTOPstate(Ui_MainWindow,MainWindow))
+        self.acceptbutton = QtWidgets.QPushButton(estopWindow, clicked=lambda: self.setESTOPstate(Ui_MainWindow))
         self.acceptbutton.clicked.connect(lambda:estopWindow.close())
         self.acceptbutton.setGeometry(QtCore.QRect(170, 200, 93, 28))
         self.acceptbutton.setObjectName("acceptbutton")
