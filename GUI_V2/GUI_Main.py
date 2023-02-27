@@ -12,9 +12,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
-import sys
-import sip
-import os
 import pyqtgraph as pg
 from pyqtgraph import PlotWidget, plot
 

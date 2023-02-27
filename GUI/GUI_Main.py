@@ -13,30 +13,45 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
 import sys
-
-
-#---Add paths of python files here----#
-sys.path.insert(1,'statesWindow.py') 
-sys.path.insert(1,'estopWindow.py')
-sys.path.insert(1,'shutdownWindow.py')
+import sip
+import os
+import pyqtgraph as pg
+from pyqtgraph import PlotWidget, plot
 
 
 from statesWindow import Ui_statesWindow
 from estopWindow import Ui_estopWindow
 from shutdownWindow import Ui_shutdownWindow
 
-
+class Ui_MainWindow(QtWidgets.QMainWindow):
     
-class Ui_MainWindow(object):
-
+    
     def __init__(self):
-        self.time =0.00000
+        QtWidgets.QMainWindow.__init__(self)
+        self.time = 0.000
+        self.timeState = 0.000
         self.log = str()
+        self.timestamps = []
+        self.velocities = []
+        
+        self.totalTimerLCD = QtWidgets.QLCDNumber(self)
+        self.totalTimerLCD.display("00:00.00")
+        self.stateTimerLCD = QtWidgets.QLCDNumber(self)
+        self.stateTimerLCD.display("00:00.00")
+        
+        # create a timer to update the LCD number
+        self.timeTotal = QtCore.QTimer()
+        self.timeTotal.setInterval(50)  # update every 50 millisecond
+        self.timeTotal.timeout.connect(self.setTotalTimeLcdSignal)
+        
+        self.stateTime=QtCore.QTimer()
+        self.stateTime.setInterval(50) # update every 50 millisecond
+        self.stateTime.timeout.connect(self.setStateTimeLCD)
 
     def openStatesWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_statesWindow()
-        self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow,self.getLogList(),self.getTotalTimer())
+        self.ui.setupUi(self.window,self,self.getLogList(),self.getTotalTimer())
         self.window.show()
         
     def openEstopWindow(self):
@@ -51,47 +66,35 @@ class Ui_MainWindow(object):
         self.ui.setupUi(self.window,Ui_MainWindow(),MainWindow)
         self.window.show()
         
-#-----------Set clock and update Log of UI --------------------#        
+#-----------Set clock and update Log of UI --------------------# 
+    def startTotalTimer(self):
+        self.timeTotal.start()
 
-    def setTotalTimer(self,timer):
-        if timer is None:
-            self.time=0.000
-        else:
-            self.time = timer
-        self.totalTime=QtCore.QTimer()
-        self.totalTime.setInterval(50)
-        self.totalTime.timeout.connect(self.setTotalTimeLCD)
-        self.totalTime.start()
-   
-    def setTotalTimeLCD(self):   
+            
+    def setTotalTimeLcdSignal(self):   
         self.time = self.time + 0.05
-        self.getTotalTimer()
-        
         m, s = divmod(self.time, 60)
         self.totalTimerLCD.display('{:02d}:{:02d}'.format(int(m), int(s)))
-        del m, s
-        
+    
     def getTotalTimer(self):
         return self.time
-        
+
     def setStateTimer(self):
-        self.timeState= 0.000
-        self.stateTime=QtCore.QTimer()
-        self.stateTime.setInterval(50)
-        self.stateTime.timeout.connect(self.setStateTimeLCD)
+        self.stateTime.stop()
         self.stateTime.start()
-        
-        
+        self.timeState = 0.000
+
     def setStateTimeLCD(self):    
-        self.timeState = self.timeState + 0.05
+        self.timeState += 0.05
         self.stateTimerLCD.display("{:.2f}".format(self.timeState))  
-        
+
     def updateLogList(self, logList):
         self.log = logList
-    
+
     def getLogList(self):
         return self.log
         
+
 #-----------Simulation of the pod --------------------#   
   
     def computeAccel(self):
@@ -99,13 +102,13 @@ class Ui_MainWindow(object):
         self.accelCounter.setInterval(1000)
         self.accelCounter.timeout.connect(self.setAccel)
         self.accelCounter.start()
-    
+
     def computeVelocity(self):
         self.computedVelocity= 0.000
         self.velocityCounter.setInterval(1000)
         self.velocityCounter.timeout.connect(self.setVelocity)
         self.velocityCounter.start()
-    
+
     def computeDistance(self):
         self.computedDistance= 0.000
         self.distanceCounter.setInterval(1000)
@@ -114,18 +117,21 @@ class Ui_MainWindow(object):
         
     def setAccel(self):
         self.computedAccel+=0.05
-        self.AccelReading .setText("{:.2f}".format(self.computedAccel))
-    
+        self.AccelReading.setText("{:.2f}".format(self.computedAccel))
+
     def setVelocity(self):
-        self.computedVelocity+=0.1
+        self.computedVelocity += (self.computedAccel/20)
         self.VelocityReading.setText("{:.2f}".format(self.computedVelocity))
+        self.velocities.append(self.computedVelocity)
+        self.timestamps.append(self.time)
+        self.graphWidget.plot(self.timestamps, self.velocities)
     
     def setDistance(self):
-        self.computedDistance+=0.5
+        self.computedDistance += 1.0
         self.DistanceReading.setText("{:.2f}".format(self.computedDistance))
-        
+
 #------------------------------------------------------#   
-        
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1465, 1049)
@@ -135,13 +141,14 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
+        self.setCentralWidget(self.centralwidget)
+        
         #Set font size for the labels
         font = QtGui.QFont()
-        font.setPointSize(20)
+        font.setPointSize(12)
         font.setBold(True)
         font.setWeight(75)
-
+         
         self.TimeTotalLabel = QtWidgets.QLabel(self.centralwidget)
         self.TimeTotalLabel.setGeometry(QtCore.QRect(10, 20, 171, 25))
         self.TimeTotalLabel.setAlignment(QtCore.Qt.AlignCenter)
@@ -151,23 +158,21 @@ class Ui_MainWindow(object):
 
         self.TimeStateLabel = QtWidgets.QLabel(self.centralwidget)
         self.TimeStateLabel.setGeometry(QtCore.QRect(10, 60, 171, 25))
-         
+    
         #Time Readings
-        
         self.TimeStateLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.TimeStateLabel.setFont(font)
         self.TimeStateLabel.setObjectName("TimeStateLabel")
         self.TimeStateLabel.setStyleSheet("background-color: white;")
         
-        self.totalTimerLCD = QtWidgets.QLCDNumber(self.centralwidget)
-        self.totalTimerLCD.setGeometry(QtCore.QRect(210, 17, 101, 31))
-        self.totalTimerLCD.setStyleSheet("QLCDNumber{\n" "\n" "background-color:black;\n" "}")
-        self.totalTimerLCD.setObjectName("totalTimerLCD")
-        
         self.stateTimerLCD = QtWidgets.QLCDNumber(self.centralwidget)
         self.stateTimerLCD.setGeometry(QtCore.QRect(210, 57, 101, 31))
         self.stateTimerLCD.setStyleSheet("QLCDNumber{\n" "\n" "background-color:black;\n" "}")
         self.stateTimerLCD.setObjectName("stateTimerLCD")
+        self.totalTimerLCD = QtWidgets.QLCDNumber(self.centralwidget)
+        self.totalTimerLCD.setGeometry(QtCore.QRect(210, 17, 101, 31))
+        self.totalTimerLCD.setStyleSheet("QLCDNumber{\n" "\n" "background-color:black;\n" "}")
+        self.totalTimerLCD.setObjectName("totalTimerLCD")
 
         self.label_Logo = QtWidgets.QLabel(self.centralwidget)
         self.pixmap = QPixmap('HyperloopLabel.png').scaled(320, 200, QtCore.Qt.KeepAspectRatio,QtCore.Qt.SmoothTransformation) #Remember to add your own path
@@ -180,37 +185,37 @@ class Ui_MainWindow(object):
         self.PodTempReading.setGeometry(QtCore.QRect(460, 85, 101, 28))
         self.PodTempReading.setObjectName("PodTempReading")
         self.PodTempReading.setStyleSheet("background-color: white;")
-        
+
         self.BrakesTempReading = QtWidgets.QTextBrowser(self.centralwidget)
         self.BrakesTempReading.setGeometry(QtCore.QRect(460, 115, 101, 28))
         self.BrakesTempReading.setObjectName("BrakesTempReading")
         self.BrakesTempReading.setStyleSheet("background-color: white;")
-        
+
         self.ClampTempReading = QtWidgets.QTextBrowser(self.centralwidget)
         self.ClampTempReading.setGeometry(QtCore.QRect(460, 145, 101, 28))
         self.ClampTempReading.setObjectName("ClampTempReading")
         self.ClampTempReading.setStyleSheet("background-color: white;")
-        
+
         self.BatteryTempReading = QtWidgets.QTextBrowser(self.centralwidget)
         self.BatteryTempReading.setGeometry(QtCore.QRect(460, 175, 101, 28))
         self.BatteryTempReading.setObjectName("BatteryTempReading")
         self.BatteryTempReading.setStyleSheet("background-color: white;")
-          
+
         self.TemperatureLabel = QtWidgets.QLabel(self.centralwidget)
-        self.TemperatureLabel.setGeometry(QtCore.QRect(370, 45, 175, 25))
+        self.TemperatureLabel.setGeometry(QtCore.QRect(355, 45, 225, 35))
 
         self.TemperatureLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.TemperatureLabel.setFont(font)
         self.TemperatureLabel.setObjectName("TemperatureLabel")
         self.TemperatureLabel.setStyleSheet("background-color: grey;")
-        
+
         #IMU labels
-        
+
         self.AccelLabel = QtWidgets.QLabel(self.centralwidget)
         self.AccelLabel.setGeometry(QtCore.QRect(670, 145, 121, 28))
         self.AccelLabel.setObjectName("AccelLabel")
         self.AccelLabel.setStyleSheet("background-color: white;")
-        
+
         self.DistanceLabel = QtWidgets.QLabel(self.centralwidget)
         self.DistanceLabel.setGeometry(QtCore.QRect(670, 85, 121, 28))
         self.DistanceLabel.setObjectName("DistanceLabel")
@@ -220,9 +225,9 @@ class Ui_MainWindow(object):
         self.VelocityLabel.setGeometry(QtCore.QRect(670, 115, 121, 28))
         self.VelocityLabel.setObjectName("VelocityLabel")
         self.VelocityLabel.setStyleSheet("background-color: white;")
-        
+
         #IMU Readings
-    
+
         self.VelocityReading = QtWidgets.QTextBrowser(self.centralwidget)
         self.VelocityReading.setGeometry(QtCore.QRect(795, 115, 101, 28))
         self.VelocityReading.setObjectName("VelocityReading")
@@ -262,7 +267,7 @@ class Ui_MainWindow(object):
         
         
         self.IMULabel= QtWidgets.QLabel(self.centralwidget)
-        self.IMULabel.setGeometry(QtCore.QRect(700, 45, 121, 25))
+        self.IMULabel.setGeometry(QtCore.QRect(675, 45, 225, 35))
 
         self.IMULabel.setFont(font)
         self.IMULabel.setAlignment(QtCore.Qt.AlignCenter)
@@ -296,7 +301,7 @@ class Ui_MainWindow(object):
         self.RearRightLabel.setStyleSheet("background-color: white;")
 
         self.LevitationLabel = QtWidgets.QLabel(self.centralwidget)
-        self.LevitationLabel.setGeometry(QtCore.QRect(990, 45, 200, 25))
+        self.LevitationLabel.setGeometry(QtCore.QRect(990, 45, 225, 35))
         self.LevitationLabel.setFont(font)
         self.LevitationLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.LevitationLabel.setObjectName("LevitationLabel")
@@ -341,6 +346,13 @@ class Ui_MainWindow(object):
         self.NavTab.setObjectName("NavTab")
         self.tabWidget.addTab(self.NavTab, "")
         
+        #Graph for plotting velocity of the pod
+        self.graphWidget = pg.PlotWidget(self.NavTab)
+
+        # plot data: x, y values
+        #self.graphWidget.plot(hour, temperature)
+        self.graphWidget.setGeometry(QtCore.QRect(100, 50, 800, 400))
+    
         # Enable scrolling option
         
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
@@ -368,7 +380,6 @@ class Ui_MainWindow(object):
                                     clicked=lambda: self.openShutdownWindow())
         self.shutdownButton.setGeometry(QtCore.QRect(40, 261, 221, 61))
         self.shutdownButton.setBaseSize(QtCore.QSize(100, 100))
-
         self.shutdownButton.setFont(font)
         self.shutdownButton.setAutoFillBackground(True)
         self.shutdownButton.setAutoDefault(False)
@@ -444,7 +455,7 @@ class Ui_MainWindow(object):
         self.AccelLabel.setText(_translate("MainWindow", "Accel (m/s2):"))
         self.VelocityReading.setHtml(_translate("MainWindow", "0"))
         self.DistanceReading.setHtml(_translate("MainWindow", "0"))
-        self.AccelReading .setHtml(_translate("MainWindow", "0"))
+        self.AccelReading.setHtml(_translate("MainWindow", "0"))
 
         self.RearLeftLabel.setText(_translate("MainWindow", "Rear Left:"))
         self.FrontRightLabel.setText(_translate("MainWindow", "Front Right:"))
@@ -470,12 +481,3 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.LowSpeedTab), _translate("MainWindow", "Low Speed"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.NavTab), _translate("MainWindow", "Nav"))
 
-if __name__ == "__main__":
-    import sys
-    log = str()
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
