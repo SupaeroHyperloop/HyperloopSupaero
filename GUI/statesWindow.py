@@ -39,7 +39,7 @@ class Ui_statesWindow(QtWidgets.QWidget):
         self.ui.setStateTimer()
         
         self.ui.PodModeReading.setText(TextButton)
-        self.ui.LogHistoryBrowser.insertPlainText(log)
+        self.ui.LogHistoryBrowser.setText(log)
 
     def setInitState(self,main_w,log):
         TextButton= self.InitButton_FS.text()
@@ -54,7 +54,7 @@ class Ui_statesWindow(QtWidgets.QWidget):
         self.ui.computeAccel()
         
         self.ui.PodModeReading.setText(TextButton)
-        self.ui.LogHistoryBrowser.insertPlainText(log)
+        self.ui.LogHistoryBrowser.setText(log)
         
     def setDriveState(self,main_w,log):
         TextButton= self.DriveButton_DS.text()
@@ -68,7 +68,7 @@ class Ui_statesWindow(QtWidgets.QWidget):
         self.ui.updateLogList(log)
                 
         self.ui.PodModeReading.setText(TextButton)
-        self.ui.LogHistoryBrowser.insertPlainText(log)
+        self.ui.LogHistoryBrowser.setText(log)
         
         
     def setPreArmState(self,main_w,log):
@@ -83,7 +83,7 @@ class Ui_statesWindow(QtWidgets.QWidget):
         self.ui.updateLogList(log)
                 
         self.ui.PodModeReading.setText(TextButton)
-        self.ui.LogHistoryBrowser.insertPlainText(log)
+        self.ui.LogHistoryBrowser.setText(log)
 
         
     def setArmState(self,main_w,log):
@@ -98,7 +98,7 @@ class Ui_statesWindow(QtWidgets.QWidget):
         self.ui.updateLogList(log)
                 
         self.ui.PodModeReading.setText(TextButton)
-        self.ui.LogHistoryBrowser.insertPlainText(log)
+        self.ui.LogHistoryBrowser.setText(log)
 
 
     def setLaunchState(self,main_w,log):
@@ -114,7 +114,7 @@ class Ui_statesWindow(QtWidgets.QWidget):
         self.ui.updateLogList(log)
                 
         self.ui.PodModeReading.setText(TextButton)
-        self.ui.LogHistoryBrowser.insertPlainText(log)
+        self.ui.LogHistoryBrowser.setText(log)
 
   
     def setFlightState(self,main_w,log):
@@ -131,7 +131,7 @@ class Ui_statesWindow(QtWidgets.QWidget):
         self.ui.updateLogList(log)
                 
         self.ui.PodModeReading.setText(TextButton)
-        self.ui.LogHistoryBrowser.insertPlainText(log)
+        self.ui.LogHistoryBrowser.setText(log)
 
         
     def setSoftStop(self,main_w,log):
@@ -148,7 +148,7 @@ class Ui_statesWindow(QtWidgets.QWidget):
         self.ui.updateLogList(log)
                 
         self.ui.PodModeReading.setText(TextButton)
-        self.ui.LogHistoryBrowser.insertPlainText(log)
+        self.ui.LogHistoryBrowser.setText(log)
 
 
     def setupUi(self, statesWindow, Ui_MainWindow, log,timer):

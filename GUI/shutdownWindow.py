@@ -11,15 +11,30 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_shutdownWindow(object):
-    def setShutdownState(self,main_w):
-        TextButton= 'Shutdown'
+class Ui_shutdownWindow(QtWidgets.QWidget):
+    
+    def setShutdownState(self,main_w,log):
         self.ui=main_w
-        self.ui.textBrowser.setText(TextButton)
-    def setupUi(self, shutdownWindow,Ui_MainWindow):
+        TextButton= 'Shutdown'
+        
+        timer = self.ui.time
+        self.ui.setStateTimer()
+        
+        m, s = divmod(timer, 60)
+
+        log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": SHUTDOWN...\n"
+        
+        self.ui.updateLogList(log)
+        timer = self.ui.time
+        self.ui.setStateTimer()
+        
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.setText(log)
+        
+    def setupUi(self, shutdownWindow,Ui_MainWindow,log):
         shutdownWindow.setObjectName("shutdownWindow")
         shutdownWindow.resize(569, 300)
-        self.acceptbutton = QtWidgets.QPushButton(shutdownWindow, clicked=lambda: self.setShutdownState(Ui_MainWindow))
+        self.acceptbutton = QtWidgets.QPushButton(shutdownWindow, clicked=lambda: self.setShutdownState(Ui_MainWindow,log))
         self.acceptbutton.clicked.connect(lambda:shutdownWindow.close())
         self.acceptbutton.setGeometry(QtCore.QRect(170, 230, 93, 28))
         self.acceptbutton.setObjectName("acceptbutton")
@@ -54,6 +69,8 @@ class Ui_shutdownWindow(object):
 
         self.label.setText(_translate("shutdownWindow", "Do you really want to shutdown the system? Y/N"))
 
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -64,5 +81,4 @@ if __name__ == "__main__":
 
     sys.exit(app.exec_())
 
-    sys.exit(app.exec_())
 

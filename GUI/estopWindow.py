@@ -11,14 +11,26 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_estopWindow(object):
-    def setESTOPstate(self,main_w):
-        TextButton= 'ESTOP'
+class Ui_estopWindow(QtWidgets.QWidget):
+    def setESTOPstate(self,main_w,log):
         self.ui=main_w
+        TextButton= 'ESTOP'
         
-        self.ui.textBrowser.setText(TextButton)
+        timer = self.ui.time
+        self.ui.setStateTimer()
         
-    def setupUi(self, estopWindow,Ui_MainWindow):
+        m, s = divmod(timer, 60)
+
+        log = log + '{:02d}:{:02d}'.format(int(m), int(s)) + ": Emergancy Stop Called...\n"
+        
+        self.ui.updateLogList(log)
+        timer = self.ui.time
+        self.ui.setStateTimer()
+        
+        self.ui.PodModeReading.setText(TextButton)
+        self.ui.LogHistoryBrowser.setText(log)
+        
+    def setupUi(self, estopWindow,Ui_MainWindow,log):
         estopWindow.setObjectName("estopWindow")
         estopWindow.resize(546, 300)
         self.label = QtWidgets.QLabel(estopWindow)
@@ -28,7 +40,7 @@ class Ui_estopWindow(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         
-        self.acceptbutton = QtWidgets.QPushButton(estopWindow, clicked=lambda: self.setESTOPstate(Ui_MainWindow))
+        self.acceptbutton = QtWidgets.QPushButton(estopWindow, clicked=lambda: self.setESTOPstate(Ui_MainWindow,log))
         self.acceptbutton.clicked.connect(lambda:estopWindow.close())
         self.acceptbutton.setGeometry(QtCore.QRect(170, 200, 93, 28))
         self.acceptbutton.setObjectName("acceptbutton")

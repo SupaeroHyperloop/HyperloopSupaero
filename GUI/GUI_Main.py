@@ -57,13 +57,13 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     def openEstopWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_estopWindow()
-        self.ui.setupUi(self.window,Ui_MainWindow())
+        self.ui.setupUi(self.window,self,self.getLogList())
         self.window.show()
         
     def openShutdownWindow(self):
         self.window=QtWidgets.QMainWindow()
         self.ui=Ui_shutdownWindow()
-        self.ui.setupUi(self.window,Ui_MainWindow())
+        self.ui.setupUi(self.window,self,self.getLogList())
         self.window.show()
         
 #-----------Set clock and update Log of UI --------------------# 
