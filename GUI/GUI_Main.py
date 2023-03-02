@@ -15,8 +15,8 @@ from PyQt5.QtGui import QPixmap
 import sys
 import sip
 import os
-import pyqtgraph as pg
-from pyqtgraph import PlotWidget, plot
+#import pyqtgraph as pg
+#from pyqtgraph import PlotWidget, plot
 
 
 from statesWindow import Ui_statesWindow
@@ -33,11 +33,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.log = str()
         self.timestamps = []
         self.velocities = []
-        
-        self.totalTimerLCD = QtWidgets.QLCDNumber(self)
-        self.totalTimerLCD.display("00:00.00")
-        self.stateTimerLCD = QtWidgets.QLCDNumber(self)
-        self.stateTimerLCD.display("00:00.00")
         
         # create a timer to update the LCD number
         self.timeTotal = QtCore.QTimer()
@@ -70,7 +65,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     def startTotalTimer(self):
         self.timeTotal.start()
 
-            
     def setTotalTimer(self):   
         self.time = self.time + 0.05
         m, s = divmod(self.time, 60)
@@ -124,7 +118,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.VelocityReading.setText("{:.2f}".format(self.computedVelocity))
         self.velocities.append(self.computedVelocity)
         self.timestamps.append(self.time)
-        self.graphWidget.plot(self.timestamps, self.velocities)
+        # self.graphWidget.plot(self.timestamps, self.velocities)
     
     def setDistance(self):
         self.computedDistance += 1.0
@@ -347,11 +341,11 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.tabWidget.addTab(self.NavTab, "")
         
         #Graph for plotting velocity of the pod
-        self.graphWidget = pg.PlotWidget(self.NavTab)
+        # self.graphWidget = pg.PlotWidget(self.NavTab)
 
         # plot data: x, y values
         #self.graphWidget.plot(hour, temperature)
-        self.graphWidget.setGeometry(QtCore.QRect(100, 50, 800, 400))
+        #self.graphWidget.setGeometry(QtCore.QRect(100, 50, 800, 400))
     
         # Enable scrolling option
         
