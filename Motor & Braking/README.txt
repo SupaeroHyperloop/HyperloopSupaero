@@ -4,8 +4,8 @@
 
 
 -------  LIM CONTROL  --------
-Files: lim_basic_model.slx  ----> simulink model based on 
-       LIMvariables.m  -----> initialize variables
+Files: LIM_version_25052023  ----> simulink model based on 
+       LIMvariables.m  -----> initialize variables and PID values
 
  
 
