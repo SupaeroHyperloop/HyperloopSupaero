@@ -425,9 +425,7 @@ class StateMachine:
 		#If no transition was taken then execute local reactions
 		if transitioned_after == transitioned_before:
 			if self.__time_events[1]:
-				self.
-				
-				= self.velocity + 4.2
+				self.velocity = self.velocity + 4.2
 				self.distance = self.distance + self.velocity
 			transitioned_after = self.__react(transitioned_before)
 		return transitioned_after
