@@ -1,9 +1,9 @@
 clear all
-%s s u b s c r i p t means s t a t o r / primary
-%r s u b s c r i p t means rotor / secondary / l i n o r
-%Parameters from MPC paper r e f e r r e d as number 11
-Rs = 1.298 ; %Primary r e s i s t a n c e
-Rr = 0.976 ; %Secondary r e s i s t a n c e
+%s subscript means stator / primary
+%r subscript means rotor / secondary / linor
+%Parameters from MPC paper referred as number 11
+Rs = 1.298 ; %Primary resistance
+Rr = 0.976 ; %Secondary resistance
 R_s=Rs ;
 R_R=Rr ;
 Ls=0.0684 ; %Primary inductance
@@ -13,7 +13,7 @@ L_M=Lm;
 L_ls = Ls -Lm; %s t a t o r / primary leakage inductance
 L_lr = Lr -Lm; %rotor / secondary leakage inductance
 Ll=L_ls+L_lr ;
-L_alpha=Ls*Lr -Lm^2;
+L_alpha=(Ls+Lm)*(Lr+Lm) -Lm^2;
 %pole pitch in meters %w=pi / tau ∗v or w=pi /(2∗ tau )∗ v
 p = 4 ; %pole p a i r s
 %D = 0 . 1 ; %Viscous damping
