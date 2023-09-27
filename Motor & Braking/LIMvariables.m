@@ -29,22 +29,22 @@ m = 10; %POD mass (kg)
 %% CONTROL
 
 %Velocity Control
-kp_speed = 0.1;
-ki_speed = 10;
+kp_speed = 2;
+ki_speed = 1;
 
 %Force Control
-kp_force = 0.15;
-ki_force =1;
+kp_force = 0.015;
+ki_force =15;
 
 %Current Control
-kp_iedx = 25;
-ki_iedx = 80000;
-kp_ieqx = 25;
-ki_ieqx = 80000;
+kp_iedx = 0.2;
+ki_iedx = 0.5;
+kp_ieqx = 0.2;
+ki_ieqx = 0.5;
 
 %Induction Control
 
-kp_lambda = 200;
-ki_lambda = 1000000;
+kp_lambda = 2;
+ki_lambda = 10;
 
 
