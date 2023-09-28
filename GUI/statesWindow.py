@@ -13,7 +13,7 @@
     
    * This interface is still currently in the development stage, so modifications to its design and functionality will be added overtime.
 
-@author: SupaeroHyperloop
+@author: SupaeroHyperloop wazza
 """
 
 
