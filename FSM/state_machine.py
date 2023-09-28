@@ -2,7 +2,7 @@ import queue
 import sys, os
 
 class StateMachine:
-	"""Implementation of the state machine StateMachine. TEST TEST
+	"""Implementation of the state machine StateMachine. TESTING THIS !! 
 	"""
 
 	class State:
