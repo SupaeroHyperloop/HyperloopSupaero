@@ -6,7 +6,11 @@
 
 * This interface is still currently in the development stage, so modifications to its design and functionality will be added overtime.
 
+<<<<<<< HEAD
 @author: SupaeroHyperloop test
+=======
+@author: SupaeroHyperloop testttt
+>>>>>>> f9c96e88e4a94c896492c9d79201ee3082d22f96
 """
 
 from PyQt5 import QtCore, QtGui, QtWidgets
