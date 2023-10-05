@@ -9,7 +9,7 @@
 <<<<<<< HEAD
 @author: SupaeroHyperloop test
 =======
-@author: SupaeroHyperloop testttt
+@author: SupaeroHyperloop testt
 >>>>>>> f9c96e88e4a94c896492c9d79201ee3082d22f96
 """
 
