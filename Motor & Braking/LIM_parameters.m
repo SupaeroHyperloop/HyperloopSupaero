@@ -43,8 +43,8 @@ Ra= alpha_c*L_sigma_hat - R_hat ; %active resistance used for minimising steady 
 kp_c=alpha_c*L_sigma_hat ; %chapter 4
 ki_c=alpha_c*(R_hat+Ra ) ;
 %ki_c=alpha_c ∗R_hat;
-V_sat=415*sqrt(2/3);
-
+%V_sat=415*sqrt(2/3);
+V_sat = 1000;
 
 %Speed C o n t r o l l e r
 alpha_s=1/120*alpha_c ;
