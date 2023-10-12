@@ -1,0 +1,6 @@
+LIBRARY aEbzOuRnAsur5TP1IFd8hH_cclib.dll
+EXPORTS
+    get_dll_checksum_aEbzOuRnAsur5TP1IFd8hH
+    init_aEbzOuRnAsur5TP1IFd8hH
+    PI_controller_aEbzOuRnAsur5TP1IFd8hH
+    get_checksum_source_info

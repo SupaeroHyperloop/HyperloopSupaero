@@ -1,0 +1,5 @@
+LIBRARY Zdy8NOk0yQCRPWiCGuBRhD_cclib.dll
+EXPORTS
+    get_dll_checksum_Zdy8NOk0yQCRPWiCGuBRhD
+    PI_controller_Zdy8NOk0yQCRPWiCGuBRhD
+    get_checksum_source_info

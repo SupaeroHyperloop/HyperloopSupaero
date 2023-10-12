@@ -1,0 +1,4 @@
+[GUI],2023-06-28 18:58:22.567723563 +0200 CEST m=+2855.426975434,,,,613,map[direction:{FORWARD true} svpwm_vdc:{75 true} target_speed:{20 true}]
+[GUI],2023-06-28 18:58:22.705974156 +0200 CEST m=+2855.565226033,,,,613,map[direction:{FORWARD true} svpwm_vdc:{75 true} target_speed:{20 true}]
+[GUI],2023-06-28 18:58:52.766984511 +0200 CEST m=+2885.626236389,,,,614,map[]
+[GUI],2023-06-28 18:59:02.296387865 +0200 CEST m=+2895.155639736,,,,609,map[]

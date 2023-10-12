@@ -1,0 +1,22 @@
+{
+  "SimulinkCodeImporterVersion": 1,
+  "LibraryFileName": "pi_con_C",
+  "OutputFolder": "C:\\Users\\mique\\iCloudDrive\\Hyperloop Upv\\Speed_Control_FDD_v2\\C code",
+  "CustomCode": {
+    "SourceFiles": ".\\PI.c",
+    "Language": "C",
+    "GlobalVariableInterface": true,
+    "FunctionArrayLayout": "NotSpecified"
+  },
+  "Options": {
+    "CreateTestHarness": false
+  },
+  "FunctionsToImport": "PI_controller",
+  "TestType": "UnitTest",
+  "SandboxSettings": {
+    "Mode": "UseOriginalCode",
+    "CopySourceFiles": true,
+    "RemoveAllPragma": false,
+    "RemoveVariableDefinitionInHeader": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "SimulinkCodeImporterVersion": 1,
+  "LibraryFileName": "controladores",
+  "OutputFolder": "C:\\Users\\mique\\iCloudDrive\\Hyperloop Upv\\Speed_Control_HIL\\C code",
+  "CustomCode": {
+    "SourceFiles": ".\\PI.c",
+    "InterfaceHeaders": "PI.h",
+    "Language": "C",
+    "GlobalVariableInterface": true,
+    "FunctionArrayLayout": "NotSpecified"
+  },
+  "Options": {
+    "CreateTestHarness": false
+  },
+  "FunctionsToImport": [
+    "PI_controller",
+    "model_initialize"
+  ],
+  "TestType": "IntegrationTest",
+  "SandboxSettings": {
+    "Mode": "GenerateAggregatedHeader",
+    "CopySourceFiles": true,
+    "RemoveAllPragma": false,
+    "RemoveVariableDefinitionInHeader": false
+  }
+}

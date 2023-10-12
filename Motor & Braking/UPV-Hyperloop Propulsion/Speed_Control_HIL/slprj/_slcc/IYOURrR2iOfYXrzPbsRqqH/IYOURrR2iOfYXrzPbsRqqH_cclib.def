@@ -1,0 +1,12 @@
+LIBRARY IYOURrR2iOfYXrzPbsRqqH_cclib.dll
+EXPORTS
+    get_dll_checksum_IYOURrR2iOfYXrzPbsRqqH
+    PI_controller_IYOURrR2iOfYXrzPbsRqqH
+    __mw_instrum_initialize_coverage
+    __mw_instrum_upload_coverage_synthesis
+    __mw_instrum_terminate_coverage
+    __mw_instrum_get_db_len
+    __mw_instrum_get_db_ptr
+    __mw_instrum_get_hits_size
+    __mw_instrum_get_hits_ptr
+    get_checksum_source_info
